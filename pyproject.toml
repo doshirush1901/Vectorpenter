@@ -1,0 +1,13 @@
+[project]
+name = "vectorpenter"
+version = "0.1.0"
+description = "Vectorpenter — The carpenter of context: building vectors into memory."
+authors = [{ name = "Machinecraft AI", email = "" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools]
+packages = ["apps", "core", "ingest", "index", "rag", "state", "tools"]
+
+[project.scripts]
+vectorpenter = "apps.cli:main"
