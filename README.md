@@ -55,9 +55,12 @@ cp env.example .env
 # ✏️ Edit .env with your OpenAI + Pinecone keys
 
 # 📦 Step 3: Install
-pip install -r requirements.txt
+pip install -e .  # Installs vectorpenter command
 
-# 🎉 Step 4: Start chatting!
+# 🐳 Step 4: Start local services (optional)
+make up  # Starts Typesense for hybrid search
+
+# 🎉 Step 5: Start chatting!
 python -m apps.cursor_chat
 ```
 
@@ -770,6 +773,11 @@ vectorpenter ask "What did all teams report?"  # 🌍 Global insights
 <summary>📋 <strong>Command Cheat Sheet</strong></summary>
 
 ```bash
+# 🐳 SERVICES
+make up                             # Start Typesense (hybrid search)
+make up-all                         # Start all services (Typesense, PostgreSQL, Redis)
+make down                           # Stop all services
+
 # 📥 INGESTION
 vectorpenter ingest ./docs          # Process documents
 vectorpenter snap --url "site.com"  # Capture webpage
@@ -777,7 +785,7 @@ vectorpenter snap --url "site.com"  # Capture webpage
 # 🔍 SEARCH & QUERY  
 vectorpenter ask "question"          # Basic search
 vectorpenter ask "question" --hybrid # Vector + keyword
-vectorpenter ask "question" --rerank # AI reranking
+vectorpenter ask "question" --rerank # Voyage AI reranking (ONLY reranker)
 vectorpenter ask "question" --hybrid --rerank --k 20  # Full power
 
 # 🛠️ MANAGEMENT

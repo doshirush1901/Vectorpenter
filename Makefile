@@ -149,12 +149,39 @@ pre-release: full-check
 	@echo "🚀 Pre-release checks completed successfully"
 	@echo "Ready for release!"
 
-# Docker targets (if Docker is available)
+# Docker targets
 docker-build:
 	docker build -t vectorpenter:latest .
 
 docker-run:
 	docker run -p 8000:8000 --env-file .env vectorpenter:latest
+
+# Local services
+up:
+	docker compose up -d typesense
+	@echo "✅ Typesense started on http://localhost:8108"
+	@echo "💡 Set TYPESENSE_API_KEY=xyz in .env to connect"
+
+up-all:
+	docker compose up -d
+	@echo "✅ All services started:"
+	@echo "  • Typesense: http://localhost:8108"
+	@echo "  • PostgreSQL: localhost:5432"
+	@echo "  • Redis: localhost:6379"
+
+down:
+	docker compose down
+	@echo "✅ All services stopped"
+
+logs:
+	docker compose logs -f
+
+# Quick development workflow with services
+dev-full: up dev-setup
+	@echo "🚀 Full development environment ready!"
+	@echo "  • Services running"
+	@echo "  • Dependencies installed"
+	@echo "  • Environment configured"
 
 # Utility targets
 check-deps:
