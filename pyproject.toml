@@ -7,7 +7,7 @@ requires-python = ">=3.10"
 dependencies = []
 
 [tool.setuptools]
-packages = ["apps", "core", "ingest", "index", "rag", "state", "tools"]
+packages = ["apps", "core", "ingest", "index", "rag", "search", "state", "tools"]
 
 [project.scripts]
 vectorpenter = "apps.cli:main"
