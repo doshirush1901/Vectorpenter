@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What is Vectorpenter?",
+    "expected_chunks": ["README.md::0", "README.md::1"],
+    "expected_answer_keywords": ["vectorpenter", "carpenter", "context", "memory", "local", "ai"],
+    "category": "product_overview"
+  },
+  {
+    "question": "How do I install Vectorpenter?",
+    "expected_chunks": ["README.md::2", "README.md::3"],
+    "expected_answer_keywords": ["install", "pip", "requirements", "env", "setup"],
+    "category": "installation"
+  },
+  {
+    "question": "What are the main features?",
+    "expected_chunks": ["README.md::4", "README.md::5"],
+    "expected_answer_keywords": ["hybrid", "search", "reranking", "translation", "grounding"],
+    "category": "features"
+  },
+  {
+    "question": "How does hybrid search work?",
+    "expected_chunks": ["README.md::6", "README.md::7"],
+    "expected_answer_keywords": ["vector", "keyword", "pinecone", "typesense", "fusion"],
+    "category": "technical"
+  },
+  {
+    "question": "What cloud services are supported?",
+    "expected_chunks": ["README.md::8", "README.md::9"],
+    "expected_answer_keywords": ["google", "cloud", "docai", "vertex", "translation", "gcs"],
+    "category": "cloud_integration"
+  }
+]

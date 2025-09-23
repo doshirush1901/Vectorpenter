@@ -807,10 +807,43 @@ make production-check              # Validate readiness
 
 ### 🎉 **Ready to Build Your Knowledge Empire?**
 
-```
+#### **⚡ Local Quickstart (Copy-Paste Ready)**
+
+```bash
+# 1. Clone and setup
 git clone https://github.com/doshirush1901/Vectorpenter.git
-cd vectorpenter && make dev-setup
+cd vectorpenter
+cp env.example .env
+
+# 2. Edit .env with your keys (minimum required):
+# OPENAI_API_KEY=sk-your-key-here
+# PINECONE_API_KEY=your-pinecone-key
+
+# 3. Install and start services
+pip install -e .
+make up  # Starts Typesense for hybrid search
+
+# 4. Create sample data and test
+echo "Vectorpenter is amazing for document search!" > data/inputs/test.txt
+vectorpenter ingest data/inputs
+vectorpenter index
+vectorpenter ask "What is Vectorpenter?" --hybrid --rerank
+
+# 5. Start interactive chat
 python -m apps.cursor_chat
+```
+
+#### **🌟 Advanced Setup (All Features)**
+
+```bash
+# Enable all Google Cloud features in .env:
+USE_GOOGLE_DOC_AI=true        # Smart PDF parsing
+USE_TRANSLATION=true          # Multi-language support  
+USE_GOOGLE_GROUNDING=true     # Web search fallback
+USE_SCREENSHOTONE=true        # Webpage capture
+USE_GCS=true                  # Audit archival
+
+# Then follow GCP_SETUP.md for service configuration
 ```
 
 **🔨 Start building vectors into memory today! ✨**

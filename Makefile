@@ -197,6 +197,20 @@ count-lines:
 benchmark:
 	python -m pytest tests/e2e/test_complete_workflow.py::TestPerformanceWorkflow -v
 
+# Evaluation
+eval:
+	python apps/eval.py --eval-file data/eval/questions.json
+	@echo "✅ Evaluation completed"
+
+eval-hybrid:
+	python apps/eval.py --eval-file data/eval/questions.json --hybrid
+	@echo "✅ Hybrid evaluation completed"
+
+eval-full:
+	python apps/eval.py --eval-file data/eval/questions.json --output results/eval_vector.json
+	python apps/eval.py --eval-file data/eval/questions.json --hybrid --output results/eval_hybrid.json
+	@echo "✅ Full evaluation completed - check results/ directory"
+
 # Data management
 create-sample-data:
 	mkdir -p data/inputs
