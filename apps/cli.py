@@ -1,5 +1,6 @@
 from __future__ import annotations
 import argparse
+import os
 from core.logging import logger
 from ingest.pipeline import ingest_path
 from index.upsert import build_and_upsert
@@ -57,6 +58,10 @@ def cmd_ask(q: str, k: int = 12, hybrid: bool = False, rerank: bool = False):
         snippets = snippets[:k]  # Trim to final k
         search_type += "+rerank"
     
+    # Late windowing - expand with neighboring chunks
+    from rag.context_builder import expand_with_neighbors
+    snippets = expand_with_neighbors(snippets, left=1, right=1, max_chars=12000)
+    
     # Google grounding fallback
     external_snippets = []
     if is_grounding_enabled() and should_use_grounding(best_score, len(snippets), k):
@@ -109,6 +114,10 @@ def main():
     pa.add_argument("--k", type=int, default=12, help="Number of results to retrieve (default: 12)")
     pa.add_argument("--hybrid", action="store_true", help="Use hybrid search (vector + keyword)")
     pa.add_argument("--rerank", action="store_true", help="Use reranking for better results")
+    
+    # Snap command
+    ps = sub.add_parser("snap", help="Capture webpage screenshot into data/inputs/")
+    ps.add_argument("--url", required=True, help="URL to capture")
 
     args = p.parse_args()
     
@@ -118,8 +127,27 @@ def main():
         cmd_index()
     elif args.cmd == "ask":
         cmd_ask(args.q, args.k, args.hybrid, args.rerank)
+    elif args.cmd == "snap":
+        cmd_snap(args.url)
     else:
         p.print_help()
+
+def cmd_snap(url: str):
+    """Capture webpage screenshot using ScreenshotOne"""
+    if os.getenv("USE_SCREENSHOTONE", "false").lower() == "true" and os.getenv("SCREENSHOTONE_API_KEY"):
+        try:
+            from tools.screenshotone import fetch_url
+            path = fetch_url(url)
+            logger.info(f"Saved screenshot to {path}")
+            print(f"📸 Screenshot saved: {path}")
+            print(f"💡 Run 'vectorpenter ingest data/inputs' to make it searchable")
+        except Exception as e:
+            logger.error(f"Screenshot capture failed: {e}")
+            print(f"❌ Failed to capture screenshot: {e}")
+    else:
+        logger.warning("ScreenshotOne disabled; set USE_SCREENSHOTONE=true and provide SCREENSHOTONE_API_KEY.")
+        print("⚠️  ScreenshotOne disabled or not configured")
+        print("   Set USE_SCREENSHOTONE=true and SCREENSHOTONE_API_KEY in .env")
 
 if __name__ == "__main__":
     main()

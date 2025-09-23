@@ -2,6 +2,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Tuple
 from pypdf import PdfReader
+import os
+
+# Supported image extensions for OCR
+IMAGE_EXTS = {".png", ".jpg", ".jpeg"}
 
 try:
     import docx  # python-docx
@@ -18,6 +22,8 @@ def read_text(path: Path) -> Tuple[str, dict]:
     meta: dict = {"source": str(path), "name": path.name}
     if path.suffix.lower() == ".pdf":
         return _parse_pdf_with_auto_upgrade(path, meta)
+    if path.suffix.lower() in IMAGE_EXTS:
+        return _parse_image_with_docai(path, meta)
         
 def _parse_pdf_with_auto_upgrade(path: Path, base_meta: dict) -> Tuple[str, dict]:
     """
@@ -97,6 +103,34 @@ def _parse_pdf_with_auto_upgrade(path: Path, base_meta: dict) -> Tuple[str, dict
     except Exception as e:
         logger.error(f"PDF parsing failed completely: {e}")
         return "", {**base_meta, "parser": "error", "error": str(e)}
+
+def _parse_image_with_docai(path: Path, base_meta: dict) -> Tuple[str, dict]:
+    """
+    Parse image using DocAI OCR or return empty with suggestion
+    """
+    from core.config import settings
+    from core.logging import logger
+    
+    # Check if DocAI is enabled
+    use_docai = (
+        getattr(settings, "use_google_doc_ai", False) or 
+        os.getenv("USE_GOOGLE_DOC_AI", "false").lower() == "true"
+    )
+    
+    if use_docai:
+        try:
+            from gcp.docai import parse_pdf_with_docai
+            # DocAI can handle images too, just pass the image file
+            text, docai_meta = parse_pdf_with_docai(path)
+            logger.info(f"Image OCR via DocAI: {path.name} -> {len(text)} characters")
+            return text, {**base_meta, **docai_meta}
+        except Exception as e:
+            logger.warning(f"DocAI image OCR failed for {path.name}: {e}")
+            return "", {**base_meta, "parser": "docai_error", "error": str(e)}
+    else:
+        logger.info(f"Image file detected: {path.name} - enable USE_GOOGLE_DOC_AI for OCR")
+        return "", {**base_meta, "parser": "no_ocr", "note": "Enable USE_GOOGLE_DOC_AI for OCR on images"}
+
     if path.suffix.lower() in {".txt", ".md"}:
         return path.read_text(errors="ignore"), meta
     if path.suffix.lower() == ".docx" and docx:

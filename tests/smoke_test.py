@@ -11,6 +11,7 @@ def test_imports():
         "rag.retriever", "rag.reranker", "rag.context_builder", "rag.generator",
         "search.typesense_client", "search.hybrid",
         "gcp.docai", "gcp.vertex", "gcp.search", "gcp.translation", "gcp.gcs",
+        "tools.screenshotone",
     ]:
         importlib.import_module(m)
 
@@ -72,7 +73,17 @@ def test_gcp_modules_safe_import():
         connection_ok = test_gcs_connection()
         assert connection_ok is False  # Should fail gracefully
     
-    print("✅ All GCP modules import safely without credentials")
+    # Test ScreenshotOne module
+    from tools.screenshotone import is_screenshotone_available, test_screenshotone_connection
+    
+    screenshot_available = is_screenshotone_available()
+    print(f"ScreenshotOne available: {screenshot_available}")
+    
+    if not screenshot_available:
+        connection_ok = test_screenshotone_connection()
+        assert connection_ok is False  # Should fail gracefully
+    
+    print("✅ All GCP and external modules import safely without credentials")
 
 if __name__ == "__main__":
     test_imports()

@@ -182,6 +182,55 @@ GROUNDING_SIM_THRESHOLD=0.18
 
 **⚠️ Privacy Note**: When grounding is enabled, queries may be sent to Google Search. External links in responses should be verified before sharing.
 
+## Screenshots Ingestion (ScreenshotOne)
+
+**Capture any webpage as PNG/PDF directly into `data/inputs/`**
+
+### **How It Works**
+```bash
+# Capture a webpage
+vectorpenter snap --url "https://example.com/press"
+# Output: 📸 Screenshot saved: data/inputs/snap_1695123456.png
+
+# Make it searchable
+vectorpenter ingest data/inputs
+vectorpenter index
+vectorpenter ask "What does the press release say?"
+```
+
+### **Configuration**
+```env
+USE_SCREENSHOTONE=false
+SCREENSHOTONE_API_KEY=your-api-key
+SCREENSHOTONE_FORMAT=png        # png|jpeg|pdf
+SCREENSHOTONE_DEVICE=desktop    # desktop|tablet|mobile
+SCREENSHOTONE_FULL_PAGE=true
+SCREENSHOTONE_BLOCK_ADS=true
+```
+
+### **Setup**
+1. Get API key from [ScreenshotOne](https://screenshotone.com/)
+2. Configure in `.env` file
+3. Enable DocAI for OCR of captured images
+
+**📸 Use Cases**: Capture competitor websites, news articles, product pages, documentation sites for analysis.
+
+## Late Windowing
+
+**Retrieval-time expansion with neighboring chunks for better context**
+
+### **How It Works**
+- **Automatic**: After search and reranking, expands each result with neighbor chunks
+- **Narrative continuity**: Includes seq-1 and seq+1 chunks from same document
+- **Character-aware**: Respects total context length limits
+
+### **Benefits**
+- **Better context**: Full paragraphs instead of truncated chunks
+- **Improved coherence**: Maintains document flow and narrative
+- **Automatic**: No configuration needed, works with all search types
+
+**💡 Example**: If chunk #5 matches your query, late windowing automatically includes chunks #4 and #6 for complete context.
+
 ## Translation & Archival
 
 ### **Auto-Translation**
@@ -210,10 +259,13 @@ GCS_PREFIX=vp/ingest
 ## Data Flow
 
 ```
+Snap: ScreenshotOne → PNG/PDF → data/inputs/
 Parse (DocAI/local) → [optional Translate→EN] → Chunk → [optional DLP] → Store (SQLite) → Embeddings (OpenAI)
                                                                        ↘ [optional GCS archival]
-Ask: Vector/Hybrid(+rerank) → [fallback Google grounding] → Context Pack → LLM Answer (OpenAI/Vertex chat)
+Ask: Vector/Hybrid(+rerank) → Late windowing → [fallback Google grounding] → Context Pack → LLM Answer (OpenAI/Vertex chat)
 ```
+
+**Late windowing:** Vectorpenter expands each top hit with its neighbor chunks (seq-1/seq+1) before building the Context Pack for better continuity.
 
 ## Design decisions
 - **Pinecone** as the default vector index for ease of team usage; **SQLite** for local state (Postgres ready).

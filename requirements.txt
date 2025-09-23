@@ -1,5 +1,6 @@
 # Core dependencies
 openai>=1.40.0
+requests>=2.32.0
 pinecone-client>=5.0.0
 pydantic>=2.8.0
 python-dotenv>=1.0.1

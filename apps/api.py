@@ -102,6 +102,10 @@ def query(request: QueryRequest):
             snippets = snippets[:request.k]  # Trim to final k
             search_type += "+rerank"
         
+        # Late windowing - expand with neighboring chunks
+        from rag.context_builder import expand_with_neighbors
+        snippets = expand_with_neighbors(snippets, left=1, right=1, max_chars=12000)
+        
         # Google grounding fallback
         external_snippets = []
         from core.config import is_grounding_enabled, grounding_threshold, max_google_results
