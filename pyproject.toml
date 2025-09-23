@@ -32,6 +32,7 @@ packages = ["apps", "core", "gcp", "ingest", "index", "rag", "search", "state", 
 
 [project.scripts]
 vectorpenter = "apps.cli:main"
+vectorpenter-admin = "apps.admin:admin"
 
 [project.optional-dependencies]
 gcp = [

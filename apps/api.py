@@ -1,8 +1,12 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException, Request
+from fastapi.security import HTTPBearer
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import time
 from index.embedder import embed_texts
+from core.auth import get_current_user, get_admin_user, User
+from core.audit import audit_logger, AuditEventType
 from rag.retriever import vector_search
 from rag.context_builder import hydrate_matches, build_context
 from rag.generator import answer
@@ -15,6 +19,53 @@ app = FastAPI(
     description="The carpenter of context — building vectors into memory",
     version="0.1.0"
 )
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:8080"],  # Configure for production
+    allow_credentials=True,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
+# Add audit logging middleware
+@app.middleware("http")
+async def audit_middleware(request: Request, call_next):
+    """Log all API requests for audit purposes"""
+    start_time = time.time()
+    
+    # Get user info if available
+    user_id = "anonymous"
+    try:
+        auth_header = request.headers.get("authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            from core.auth import auth_manager
+            api_key = auth_header.replace("Bearer ", "")
+            user = auth_manager.authenticate(api_key)
+            if user:
+                user_id = user.username
+    except:
+        pass  # Continue with anonymous
+    
+    # Process request
+    response = await call_next(request)
+    
+    # Log request
+    duration_ms = (time.time() - start_time) * 1000
+    
+    audit_logger.log_event({
+        "event_type": "api_request",
+        "timestamp": time.time(),
+        "user_id": user_id,
+        "method": request.method,
+        "path": str(request.url.path),
+        "status_code": response.status_code,
+        "duration_ms": duration_ms,
+        "ip_address": request.client.host if request.client else None
+    })
+    
+    return response
 
 class QueryRequest(BaseModel):
     q: str
@@ -76,7 +127,7 @@ def metrics():
     }
 
 @app.post("/query", response_model=QueryResponse)
-def query(request: QueryRequest):
+def query(request: QueryRequest, user: User = Depends(get_current_user)):
     """Query the knowledge base with optional hybrid search and reranking"""
     try:
         # Embed the query
