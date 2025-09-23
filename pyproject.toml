@@ -28,11 +28,13 @@ Issues = "https://github.com/doshirush1901/Vectorpenter/issues"
 Changelog = "https://github.com/doshirush1901/Vectorpenter/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
-packages = ["apps", "core", "gcp", "ingest", "index", "rag", "search", "state", "tools"]
+packages = ["apps", "agents", "core", "gcp", "ingest", "index", "mcp", "rag", "search", "state", "tools"]
 
 [project.scripts]
 vectorpenter = "apps.cli:main"
 vectorpenter-admin = "apps.admin:admin"
+vp-server = "mcp.vp_server:main"
+vp-sales = "agents.vp_sales:demo_vp_sales"
 
 [project.optional-dependencies]
 gcp = [
