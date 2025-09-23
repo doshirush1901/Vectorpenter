@@ -54,6 +54,7 @@ def embed_texts(texts: List[str]) -> List[List[float]]:
     
     try:
         c = client()
+        logger.info(f"Embed provider: OpenAI ({EMBED_MODEL})")
         logger.debug(f"Generating embeddings for {len(non_empty_texts)} texts")
         
         resp = c.embeddings.create(

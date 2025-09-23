@@ -17,9 +17,86 @@ except Exception:
 def read_text(path: Path) -> Tuple[str, dict]:
     meta: dict = {"source": str(path), "name": path.name}
     if path.suffix.lower() == ".pdf":
+        return _parse_pdf_with_auto_upgrade(path, meta)
+        
+def _parse_pdf_with_auto_upgrade(path: Path, base_meta: dict) -> Tuple[str, dict]:
+    """
+    Parse PDF with auto-upgrade to DocAI when local extraction yields poor results
+    """
+    from core.config import is_docai_enabled
+    from core.logging import logger
+    
+    # Thresholds for auto-upgrade decision
+    LOW_TEXT_THRESHOLD = 500  # characters
+    EMPTY_PAGES_THRESHOLD = 0.6  # 60% empty pages
+    
+    try:
+        # Step 1: Try local PDF extraction first
         reader = PdfReader(str(path))
-        text = "\n".join(page.extract_text() or "" for page in reader.pages)
-        return text, meta
+        total_pages = len(reader.pages)
+        
+        page_texts = []
+        empty_pages = 0
+        
+        for page in reader.pages:
+            page_text = page.extract_text() or ""
+            page_texts.append(page_text)
+            
+            if not page_text.strip():
+                empty_pages += 1
+        
+        # Join all pages
+        local_text = "\n".join(page_texts)
+        text_length = len(local_text.strip())
+        empty_pages_ratio = empty_pages / total_pages if total_pages > 0 else 0
+        
+        # Log local extraction results
+        logger.debug(f"Local PDF extraction: {path.name} -> {text_length} chars, "
+                    f"{empty_pages}/{total_pages} empty pages ({empty_pages_ratio:.1%})")
+        
+        # Step 2: Decide whether to upgrade to DocAI
+        should_upgrade_to_docai = (
+            text_length < LOW_TEXT_THRESHOLD or 
+            empty_pages_ratio >= EMPTY_PAGES_THRESHOLD
+        )
+        
+        # Manual override check
+        force_docai = is_docai_enabled() and settings.use_google_doc_ai
+        
+        if force_docai or (should_upgrade_to_docai and is_docai_enabled()):
+            logger.info(f"PDF parser: DocAI ({'manual override' if force_docai else 'auto-upgrade'})")
+            
+            try:
+                from gcp.docai import parse_pdf_with_docai
+                docai_text, docai_meta = parse_pdf_with_docai(path)
+                
+                # If DocAI extraction successful and has more content, use it
+                if docai_text and len(docai_text.strip()) > text_length:
+                    logger.info(f"DocAI extraction successful: {len(docai_text)} chars vs {text_length} local chars")
+                    return docai_text, {**base_meta, **docai_meta}
+                else:
+                    logger.warning("DocAI extraction didn't improve results, using local extraction")
+                    
+            except Exception as e:
+                logger.warning(f"DocAI parsing failed, falling back to local: {e}")
+        
+        # Step 3: Use local extraction (default or fallback)
+        if not force_docai:
+            logger.info("PDF parser: PdfReader (local)")
+        else:
+            logger.info("PDF parser: DocAI failed, falling back to local")
+        
+        return local_text, {
+            **base_meta, 
+            "parser": "local", 
+            "pages": total_pages,
+            "empty_pages": empty_pages,
+            "text_length": text_length
+        }
+        
+    except Exception as e:
+        logger.error(f"PDF parsing failed completely: {e}")
+        return "", {**base_meta, "parser": "error", "error": str(e)}
     if path.suffix.lower() in {".txt", ".md"}:
         return path.read_text(errors="ignore"), meta
     if path.suffix.lower() == ".docx" and docx:

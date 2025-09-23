@@ -59,6 +59,11 @@ logs/
 .env.production
 .env.staging
 
+# GCP credentials
+creds/*.json
+!creds/.gitkeep
+service-account.json
+
 # Temporary files
 *.tmp
 *.temp

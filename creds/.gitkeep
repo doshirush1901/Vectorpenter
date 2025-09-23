@@ -1,0 +1,5 @@
+# Place your Google Cloud service account JSON file here
+# Example: service-account.json
+# 
+# IMPORTANT: Never commit actual credentials to git!
+# This directory is for local development only.

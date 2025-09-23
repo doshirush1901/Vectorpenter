@@ -115,11 +115,54 @@ curl -X POST "http://localhost:8000/query" \
      -d '{"q": "What are the main topics?", "hybrid": true, "rerank": true, "k": 12}'
 ```
 
+## GCP Auto-Upgrade for PDFs
+
+Vectorpenter intelligently handles PDF parsing with automatic upgrade to Google Cloud Document AI:
+
+### **Default Behavior**
+- **Local parsers first**: Uses `pypdf`, `python-docx`, `python-pptx`, `pandas` for all documents
+- **Smart auto-upgrade**: For PDFs with poor local extraction (scanned/low-text), automatically tries Document AI
+- **Cost-conscious**: Only uses cloud services when local parsing insufficient
+
+### **Auto-Upgrade Heuristics**
+Vectorpenter automatically upgrades to Document AI when:
+- **Low text extraction**: Local parser extracts <500 characters
+- **High empty page ratio**: >60% of pages have no extractable text
+- **Manual override**: `USE_GOOGLE_DOC_AI=true` forces DocAI for all PDFs
+
+### **Configuration**
+```env
+# GCP / Document AI (optional)
+GOOGLE_APPLICATION_CREDENTIALS=./creds/service-account.json
+GCP_PROJECT_ID=your-project-id
+GCP_LOCATION=us
+USE_GOOGLE_DOC_AI=false  # Manual override
+DOC_AI_PROCESSOR_ID=projects/your-project/locations/us/processors/your-processor-id
+
+# Vertex Chat (optional) - embeddings stay OpenAI
+USE_VERTEX_CHAT=false
+VERTEX_CHAT_MODEL=gemini-1.5-pro
+```
+
+### **GCP Setup Steps**
+1. **Enable APIs**: Document AI API, Vertex AI API (if using chat)
+2. **Create Processor**: Document OCR processor in Document AI console
+3. **Service Account**: Create with roles:
+   - `Document AI API User`
+   - `Vertex AI User` (if using chat)
+4. **Download Credentials**: Save service account JSON to `./creds/service-account.json`
+
+### **Privacy & Cost Notes**
+- **Document AI**: Sends file bytes to GCP, charges per page (~$0.015/page)
+- **Vertex Chat**: Optional alternative to OpenAI for responses
+- **Embeddings**: Always use OpenAI (no GCP embedding dependency)
+
 ## Design decisions
 - **Pinecone** as the default vector index for ease of team usage; **SQLite** for local state (Postgres ready).
 - **RAG prompt** enforces citations and rejects hallucinations: if context is insufficient, it tells you what's missing.
 - **Hybrid-ready**: optional keyword + vector + rerank for high precision.
 - **Voyage AI**: built-in reranker (model: rerank-2). If not configured, reranking is skipped.
+- **Local-first PDF parsing**: Uses local parsers by default, auto-upgrades to DocAI only when needed.
 
 ## Safety & privacy
 - Your files stay local. Only text chunks/embeddings go to Pinecone.

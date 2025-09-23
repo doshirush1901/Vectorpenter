@@ -27,6 +27,17 @@ class Settings:
     typesense_port: int = int(os.getenv("TYPESENSE_PORT", "8108"))
     typesense_protocol: str = os.getenv("TYPESENSE_PROTOCOL", "http")
     typesense_collection: str = os.getenv("TYPESENSE_COLLECTION", "vectorpenter_chunks")
+    
+    # GCP / Document AI (optional)
+    google_application_credentials: str | None = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    gcp_project_id: str | None = os.getenv("GCP_PROJECT_ID")
+    gcp_location: str = os.getenv("GCP_LOCATION", "us")
+    use_google_doc_ai: bool = os.getenv("USE_GOOGLE_DOC_AI", "false").lower() == "true"
+    doc_ai_processor_id: str | None = os.getenv("DOC_AI_PROCESSOR_ID")
+    
+    # Vertex Chat (optional) - embeddings stay OpenAI
+    use_vertex_chat: bool = os.getenv("USE_VERTEX_CHAT", "false").lower() == "true"
+    vertex_chat_model: str = os.getenv("VERTEX_CHAT_MODEL", "gemini-1.5-pro")
 
 settings = Settings()
 
@@ -63,3 +74,15 @@ def require_commercial_license(feature_name: str = "this feature"):
         logger.info("Get your license at: https://machinecraft.tech/vectorpenter/pricing")
         return False
     return True
+
+def is_docai_enabled() -> bool:
+    """Check if Document AI is enabled (manual override or auto-upgrade)"""
+    return settings.use_google_doc_ai or (
+        settings.google_application_credentials and 
+        settings.gcp_project_id and 
+        settings.doc_ai_processor_id
+    )
+
+def is_vertex_chat_enabled() -> bool:
+    """Check if Vertex AI chat is enabled"""
+    return settings.use_vertex_chat and settings.gcp_project_id and settings.google_application_credentials

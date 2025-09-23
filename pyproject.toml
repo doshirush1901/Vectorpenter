@@ -28,7 +28,7 @@ Issues = "https://github.com/doshirush1901/Vectorpenter/issues"
 Changelog = "https://github.com/doshirush1901/Vectorpenter/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
-packages = ["apps", "core", "ingest", "index", "rag", "search", "state", "tools"]
+packages = ["apps", "core", "gcp", "ingest", "index", "rag", "search", "state", "tools"]
 
 [project.scripts]
 vectorpenter = "apps.cli:main"
