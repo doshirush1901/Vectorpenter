@@ -83,13 +83,14 @@ def query(request: QueryRequest):
         vec = embed_texts([request.q])[0]
         
         # Search for relevant chunks
+        best_score = 0.0
         if request.hybrid and typesense_available():
-            matches = hybrid_search(request.q, vec, top_k=request.k)
+            matches, best_score = hybrid_search(request.q, vec, top_k=request.k)
             search_type = "hybrid"
         else:
             # Oversample for potential reranking
             search_k = request.k * 2 if request.rerank else request.k
-            matches = vector_search(vec, top_k=search_k)
+            matches, best_score = vector_search(vec, top_k=search_k)
             search_type = "vector"
         
         # Hydrate matches with full text
@@ -101,8 +102,23 @@ def query(request: QueryRequest):
             snippets = snippets[:request.k]  # Trim to final k
             search_type += "+rerank"
         
-        # Build context pack
-        pack = build_context(snippets)
+        # Google grounding fallback
+        external_snippets = []
+        from core.config import is_grounding_enabled, grounding_threshold, max_google_results
+        from gcp.search import google_ground, should_use_grounding
+        
+        if is_grounding_enabled() and should_use_grounding(best_score, len(snippets), request.k):
+            try:
+                external_snippets = google_ground(request.q, max_results=max_google_results())
+                if external_snippets:
+                    logger.info(f"API Grounding: added {len(external_snippets)} Google snippets")
+                    search_type += "+grounding"
+            except Exception as e:
+                logger.warning(f"API Grounding failed: {e}")
+        
+        # Build context pack (local + external)
+        from rag.context_builder import build_combined_context
+        pack = build_combined_context(snippets, external_snippets)
         
         # Generate answer
         if pack.strip():
@@ -117,7 +133,7 @@ def query(request: QueryRequest):
             hybrid=request.hybrid,
             rerank=request.rerank,
             search_type=search_type,
-            sources_count=len(snippets)
+            sources_count=len(snippets) + len(external_snippets)
         )
         
     except Exception as e:

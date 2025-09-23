@@ -6,7 +6,7 @@ from openai import OpenAI
 SYSTEM = (
     "You are Vectorpenter: answer ONLY using the provided Context Pack. "
     "If the context is insufficient, say what's missing and suggest a next step. "
-    "Cite with bracketed numbers like [#1], [#2] that refer to the Context Pack entries."
+    "Cite with bracketed numbers like [#1] for local context and [G#1] for Google snippets."
 )
 
 _llm: OpenAI | None = None

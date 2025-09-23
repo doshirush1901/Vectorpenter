@@ -30,17 +30,22 @@ def cmd_index():
 
 
 def cmd_ask(q: str, k: int = 12, hybrid: bool = False, rerank: bool = False):
+    from core.config import is_grounding_enabled, grounding_threshold, max_google_results
+    from rag.context_builder import build_combined_context
+    from gcp.search import google_ground, should_use_grounding
+    
     # Embed query
     vec = embed_texts([q])[0]
     
     # Search for relevant chunks
+    best_score = 0.0
     if hybrid and typesense_available():
-        matches = hybrid_search(q, vec, top_k=k)
+        matches, best_score = hybrid_search(q, vec, top_k=k)
         search_type = "hybrid"
     else:
         # Oversample for potential reranking
         search_k = k * 2 if rerank else k
-        matches = vector_search(vec, top_k=search_k)
+        matches, best_score = vector_search(vec, top_k=search_k)
         search_type = "vector"
     
     # Hydrate matches with full text
@@ -52,20 +57,39 @@ def cmd_ask(q: str, k: int = 12, hybrid: bool = False, rerank: bool = False):
         snippets = snippets[:k]  # Trim to final k
         search_type += "+rerank"
     
-    # Build context pack
-    pack = build_context(snippets)
+    # Google grounding fallback
+    external_snippets = []
+    if is_grounding_enabled() and should_use_grounding(best_score, len(snippets), k):
+        try:
+            external_snippets = google_ground(q, max_results=max_google_results())
+            if external_snippets:
+                logger.info(f"Grounding: added {len(external_snippets)} Google snippets (threshold {grounding_threshold():.3f})")
+                search_type += "+grounding"
+            else:
+                logger.info("Grounding: no Google results found")
+        except Exception as e:
+            logger.warning(f"Grounding failed: {e}")
+    else:
+        logger.info("Grounding: local only")
+    
+    # Build context pack (local + external)
+    pack = build_combined_context(snippets, external_snippets)
     
     # Generate answer
     if pack.strip():
         ans = answer(q, pack)
-        logger.info(f"Query processed ({search_type}): {len(snippets)} sources")
+        total_sources = len(snippets) + len(external_snippets)
+        logger.info(f"Query processed ({search_type}): {len(snippets)} local + {len(external_snippets)} external sources")
     else:
         ans = "I don't have enough context to answer this question. Please make sure you have ingested and indexed some documents first."
+        total_sources = 0
     
     print(f"\n=== ANSWER ({search_type}) ===\n{ans}\n")
     
     if snippets:
-        print(f"📚 Sources: {len(snippets)} chunks")
+        print(f"📚 Local Sources: {len(snippets)} chunks")
+    if external_snippets:
+        print(f"🌐 External Sources: {len(external_snippets)} Google results")
 
 
 def main():

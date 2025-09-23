@@ -38,6 +38,23 @@ class Settings:
     # Vertex Chat (optional) - embeddings stay OpenAI
     use_vertex_chat: bool = os.getenv("USE_VERTEX_CHAT", "false").lower() == "true"
     vertex_chat_model: str = os.getenv("VERTEX_CHAT_MODEL", "gemini-1.5-pro")
+    
+    # Google Search grounding (optional)
+    use_google_grounding: bool = os.getenv("USE_GOOGLE_GROUNDING", "false").lower() == "true"
+    google_search_api_key: str | None = os.getenv("GOOGLE_SEARCH_API_KEY")
+    google_search_cx: str | None = os.getenv("GOOGLE_SEARCH_CX")
+    max_google_results: int = int(os.getenv("MAX_GOOGLE_RESULTS", "3"))
+    grounding_sim_threshold: float = float(os.getenv("GROUNDING_SIM_THRESHOLD", "0.18"))
+    
+    # Translation (optional)
+    use_translation: bool = os.getenv("USE_TRANSLATION", "false").lower() == "true"
+    translate_target_lang: str = os.getenv("TRANSLATE_TARGET_LANG", "en")
+    translate_min_chars: int = int(os.getenv("TRANSLATE_MIN_CHARS", "300"))
+    
+    # Google Cloud Storage archival (optional)
+    use_gcs: bool = os.getenv("USE_GCS", "false").lower() == "true"
+    gcs_bucket: str | None = os.getenv("GCS_BUCKET")
+    gcs_prefix: str = os.getenv("GCS_PREFIX", "vp/ingest")
 
 settings = Settings()
 
@@ -86,3 +103,39 @@ def is_docai_enabled() -> bool:
 def is_vertex_chat_enabled() -> bool:
     """Check if Vertex AI chat is enabled"""
     return settings.use_vertex_chat and settings.gcp_project_id and settings.google_application_credentials
+
+def is_grounding_enabled() -> bool:
+    """Check if Google Search grounding is enabled"""
+    return settings.use_google_grounding and settings.google_search_api_key and settings.google_search_cx
+
+def is_translation_enabled() -> bool:
+    """Check if Cloud Translation is enabled"""
+    return settings.use_translation and settings.gcp_project_id and settings.google_application_credentials
+
+def is_gcs_enabled() -> bool:
+    """Check if Google Cloud Storage archival is enabled"""
+    return settings.use_gcs and settings.gcs_bucket and settings.google_application_credentials
+
+def grounding_threshold() -> float:
+    """Get grounding similarity threshold"""
+    return settings.grounding_sim_threshold
+
+def max_google_results() -> int:
+    """Get maximum Google search results"""
+    return settings.max_google_results
+
+def translate_target_lang() -> str:
+    """Get translation target language"""
+    return settings.translate_target_lang
+
+def translate_min_chars() -> int:
+    """Get minimum characters for translation"""
+    return settings.translate_min_chars
+
+def gcs_bucket() -> str:
+    """Get GCS bucket name"""
+    return settings.gcs_bucket or ""
+
+def gcs_prefix() -> str:
+    """Get GCS prefix"""
+    return settings.gcs_prefix

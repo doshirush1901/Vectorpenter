@@ -33,3 +33,66 @@ def build_context(snippets: List[Dict], max_chars: int = 12000) -> str:
         buf.append(chunk)
         total += len(chunk)
     return "".join(buf)
+
+def build_external_snippets(snips: List[Dict]) -> str:
+    """
+    Format external Google search snippets for context inclusion
+    
+    Args:
+        snips: List of Google search results
+        
+    Returns:
+        Formatted string for context pack
+    """
+    if not snips:
+        return ""
+    
+    buf = ["### External Web Context (Google)\n"]
+    for i, s in enumerate(snips, 1):
+        title = s.get('title', 'Unknown Title')
+        snippet = s.get('snippet', 'No description available')
+        link = s.get('link', '')
+        
+        buf.append(f"[G#{i}] {title}\n{snippet}\n({link})\n\n")
+    
+    return "".join(buf)
+
+def build_combined_context(
+    local_snippets: List[Dict], 
+    external_snippets: List[Dict] = None,
+    max_chars: int = 12000
+) -> str:
+    """
+    Build combined context pack with local and external snippets
+    
+    Args:
+        local_snippets: Local document snippets
+        external_snippets: External Google search snippets
+        max_chars: Maximum characters for context
+        
+    Returns:
+        Combined context pack
+    """
+    # Start with local context
+    local_context = build_context(local_snippets, max_chars=max_chars * 0.8)  # Reserve 20% for external
+    
+    # Add external context if available
+    external_context = ""
+    if external_snippets:
+        external_context = build_external_snippets(external_snippets)
+    
+    # Combine contexts
+    combined = local_context
+    if external_context:
+        # Check if we have room for external content
+        remaining_chars = max_chars - len(local_context)
+        if remaining_chars > 200:  # Minimum space for meaningful external content
+            if len(external_context) <= remaining_chars:
+                combined += "\n" + external_context
+            else:
+                # Truncate external content to fit
+                truncated_external = external_context[:remaining_chars-50] + "...\n"
+                combined += "\n" + truncated_external
+                logger.debug("External context truncated to fit within max_chars limit")
+    
+    return combined

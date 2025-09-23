@@ -157,6 +157,64 @@ VERTEX_CHAT_MODEL=gemini-1.5-pro
 - **Vertex Chat**: Optional alternative to OpenAI for responses
 - **Embeddings**: Always use OpenAI (no GCP embedding dependency)
 
+## Google Search Grounding
+
+**Optional fallback when local retrieval is weak**
+
+### **How It Works**
+- **Automatic**: Triggers when local similarity <0.18 or insufficient results
+- **Google Custom Search**: Searches web for additional context
+- **Cost-conscious**: Only when local knowledge insufficient
+
+### **Configuration**
+```env
+USE_GOOGLE_GROUNDING=false
+GOOGLE_SEARCH_API_KEY=your-api-key
+GOOGLE_SEARCH_CX=your-search-engine-id
+MAX_GOOGLE_RESULTS=3
+GROUNDING_SIM_THRESHOLD=0.18
+```
+
+### **Setup**
+1. Create [Google Custom Search Engine](https://cse.google.com/)
+2. Get API key from [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+3. Configure search engine ID (CX) in environment
+
+**⚠️ Privacy Note**: When grounding is enabled, queries may be sent to Google Search. External links in responses should be verified before sharing.
+
+## Translation & Archival
+
+### **Auto-Translation**
+- **Before processing**: Translates non-English documents to English
+- **Smart detection**: Only translates documents >300 characters
+- **Cost-aware**: Skips short documents to save money
+
+### **GCS Archival**
+- **Audit trail**: Stores raw, translated, and redacted versions
+- **Timestamped**: Each artifact tagged with processing time
+- **Organized**: Uses configurable bucket and prefix structure
+
+### **Configuration**
+```env
+# Translation
+USE_TRANSLATION=false
+TRANSLATE_TARGET_LANG=en
+TRANSLATE_MIN_CHARS=300
+
+# Archival
+USE_GCS=false
+GCS_BUCKET=gs://your-bucket-name
+GCS_PREFIX=vp/ingest
+```
+
+## Data Flow
+
+```
+Parse (DocAI/local) → [optional Translate→EN] → Chunk → [optional DLP] → Store (SQLite) → Embeddings (OpenAI)
+                                                                       ↘ [optional GCS archival]
+Ask: Vector/Hybrid(+rerank) → [fallback Google grounding] → Context Pack → LLM Answer (OpenAI/Vertex chat)
+```
+
 ## Design decisions
 - **Pinecone** as the default vector index for ease of team usage; **SQLite** for local state (Postgres ready).
 - **RAG prompt** enforces citations and rejects hallucinations: if context is insufficient, it tells you what's missing.

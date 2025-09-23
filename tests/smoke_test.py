@@ -10,7 +10,7 @@ def test_imports():
         "index.embedder", "index.pinecone_client", "index.upsert",
         "rag.retriever", "rag.reranker", "rag.context_builder", "rag.generator",
         "search.typesense_client", "search.hybrid",
-        "gcp.docai", "gcp.vertex",
+        "gcp.docai", "gcp.vertex", "gcp.search", "gcp.translation", "gcp.gcs",
     ]:
         importlib.import_module(m)
 
@@ -42,7 +42,37 @@ def test_gcp_modules_safe_import():
         connection_ok = test_vertex_connection()
         assert connection_ok is False  # Should fail gracefully
     
-    print("✅ GCP modules import safely without credentials")
+    # Test Google Search module
+    from gcp.search import is_google_search_available, test_google_search_connection
+    
+    search_available = is_google_search_available()
+    print(f"Google Search available: {search_available}")
+    
+    if not search_available:
+        connection_ok = test_google_search_connection()
+        assert connection_ok is False  # Should fail gracefully
+    
+    # Test Translation module
+    from gcp.translation import is_translation_available, test_translation_connection
+    
+    translation_available = is_translation_available()
+    print(f"Translation available: {translation_available}")
+    
+    if not translation_available:
+        connection_ok = test_translation_connection()
+        assert connection_ok is False  # Should fail gracefully
+    
+    # Test GCS module
+    from gcp.gcs import is_gcs_available, test_gcs_connection
+    
+    gcs_available = is_gcs_available()
+    print(f"GCS available: {gcs_available}")
+    
+    if not gcs_available:
+        connection_ok = test_gcs_connection()
+        assert connection_ok is False  # Should fail gracefully
+    
+    print("✅ All GCP modules import safely without credentials")
 
 if __name__ == "__main__":
     test_imports()
