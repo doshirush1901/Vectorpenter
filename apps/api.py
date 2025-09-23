@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
+import time
 from index.embedder import embed_texts
 from rag.retriever import vector_search
 from rag.context_builder import hydrate_matches, build_context
@@ -31,15 +32,47 @@ class QueryResponse(BaseModel):
 
 @app.get("/health")
 def health():
-    """Health check endpoint"""
-    return {
-        "ok": True,
+    """Comprehensive health check endpoint"""
+    from core.monitoring import health_check
+    from core.validation import validate_environment
+    from index.embedder import health_check as embedding_health_check
+    
+    # Get comprehensive health data
+    health_data = health_check()
+    
+    # Add capability checks
+    capabilities = {
+        "typesense_available": typesense_available(),
+        "rerank_available": is_rerank_available(),
+        "embedding_service": embedding_health_check()
+    }
+    
+    # Add configuration validation
+    config_validation = validate_environment()
+    
+    health_data.update({
         "service": "vectorpenter",
         "version": "0.1.0",
-        "capabilities": {
-            "typesense_available": typesense_available(),
-            "rerank_available": is_rerank_available()
+        "capabilities": capabilities,
+        "configuration": {
+            "valid": all(config_validation.values()),
+            "details": config_validation
         }
+    })
+    
+    return health_data
+
+@app.get("/metrics")
+def metrics():
+    """Get system metrics and statistics"""
+    from core.monitoring import metrics_collector
+    from core.cache import get_cache_stats
+    
+    return {
+        "query_stats": metrics_collector.get_query_stats(window_minutes=60),
+        "service_stats": metrics_collector.get_service_stats(),
+        "cache_stats": get_cache_stats(),
+        "timestamp": time.time()
     }
 
 @app.post("/query", response_model=QueryResponse)
