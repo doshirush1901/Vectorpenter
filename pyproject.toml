@@ -2,7 +2,7 @@
 name = "vectorpenter"
 version = "0.1.0"
 description = "Vectorpenter — The carpenter of context: building vectors into memory."
-authors = [{ name = "Machinecraft AI", email = "" }]
+authors = [{ name = "Machinecraft Technologies", email = "info@machinecraft.tech" }]
 requires-python = ">=3.10"
 dependencies = []
 

@@ -104,6 +104,13 @@ def hybrid_merge(keyword_results: List[Dict], vector_results: List[Dict], k: int
 def hybrid_search(query: str, query_vec: List[float], k: int = 12) -> List[Dict]:
     """Perform hybrid search combining keyword and vector results"""
     from rag.retriever import vector_search
+    from core.config import has_commercial_license
+    
+    # Commercial license check for hybrid search
+    if not has_commercial_license():
+        logger.warning("Hybrid search requires commercial license. Using vector-only search.")
+        logger.info("Get your license at: https://vectorpenter.com/pricing")
+        return vector_search(query_vec, top_k=k)
     
     # Oversample for better hybrid merging
     oversample_k = k * 2

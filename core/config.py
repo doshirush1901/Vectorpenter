@@ -30,3 +30,37 @@ class Settings:
     typesense_collection: str = os.getenv("TYPESENSE_COLLECTION", "vectorpenter_chunks")
 
 settings = Settings()
+
+def has_commercial_license() -> bool:
+    """Check if a valid commercial license is available"""
+    license_key = os.getenv("VECTORPENTER_LICENSE_KEY")
+    if not license_key:
+        return False
+    
+    # TODO: Implement actual license validation
+    # For now, any non-empty key is considered valid
+    return len(license_key.strip()) > 0
+
+def validate_license_key(license_key: str) -> bool:
+    """Validate a commercial license key"""
+    if not license_key:
+        return False
+    
+    # TODO: Implement actual license validation logic
+    # This could include:
+    # - API call to license server
+    # - Cryptographic signature verification
+    # - Expiration date checking
+    # - Feature entitlement validation
+    
+    # Placeholder: basic format check
+    return len(license_key.strip()) >= 10
+
+def require_commercial_license(feature_name: str = "this feature"):
+    """Require commercial license for a feature"""
+    if not has_commercial_license():
+        from core.logging import logger
+        logger.warning(f"Commercial license required for {feature_name}")
+        logger.info("Get your license at: https://machinecraft.tech/vectorpenter/pricing")
+        return False
+    return True

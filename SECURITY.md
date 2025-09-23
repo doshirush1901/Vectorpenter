@@ -10,7 +10,7 @@ The Vectorpenter team takes security seriously. We appreciate your efforts to re
 
 Instead, please report security vulnerabilities by:
 
-1. **Email**: Send details to security@vectorpenter.com
+1. **Email**: Send details to security@machinecraft.tech
 2. **GitHub Security Advisory**: Use GitHub's private vulnerability reporting feature
 3. **Encrypted Communication**: Use our PGP key for sensitive reports
 
@@ -133,8 +133,8 @@ We recognize security researchers who help make Vectorpenter more secure:
 
 ## 📞 **Contact Information**
 
-- **Security Email**: security@vectorpenter.com
-- **General Contact**: support@vectorpenter.com
+- **Security Email**: security@machinecraft.tech
+- **General Contact**: support@machinecraft.tech
 - **PGP Key**: [Coming Soon]
 
 ## 📚 **Security Resources**

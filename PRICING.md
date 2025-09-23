@@ -226,9 +226,9 @@ cd vectorpenter && pip install -r requirements.txt
 - **Migration assistance included**
 
 ### **Contact Sales**
-- **Enterprise inquiries**: enterprise@vectorpenter.com
-- **Custom pricing**: sales@vectorpenter.com
-- **Technical questions**: support@vectorpenter.com
+- **Enterprise inquiries**: enterprise@machinecraft.tech
+- **Custom pricing**: sales@machinecraft.tech
+- **Technical questions**: support@machinecraft.tech
 - **Phone**: +1 (555) 123-4567
 
 ### **Self-Service**
