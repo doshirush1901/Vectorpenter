@@ -1,0 +1,118 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE] "
+labels: ["enhancement", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature! 🚀
+        
+        **Before submitting:** Please search existing issues and discussions to avoid duplicates.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: "I'm frustrated when... / It would be helpful if... / Users need..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your preferred solution
+      placeholder: "I would like to see... / The feature should work like..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Any alternative solutions or workarounds you've considered
+      placeholder: "Alternatively, we could... / I've tried..."
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which component would this feature affect?
+      options:
+        - CLI (vectorpenter command)
+        - API (FastAPI server)
+        - Cursor Chat REPL
+        - Ingestion Pipeline
+        - Vector Search (Pinecone)
+        - Keyword Search (Typesense)
+        - Hybrid Search
+        - Reranking (Voyage/Cohere)
+        - Configuration
+        - Documentation
+        - New Component
+        - Multiple Components
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - "Low - Nice to have"
+        - "Medium - Would improve workflow"
+        - "High - Blocking my use case"
+        - "Critical - Required for production"
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use Case
+      description: Describe your specific use case
+      placeholder: "I work with... / My team needs... / When processing..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: mockup
+    attributes:
+      label: Mockup/Example
+      description: Any mockups, code examples, or detailed specifications
+      placeholder: |
+        ```bash
+        # Example CLI usage
+        vectorpenter new-feature --option value
+        ```
+        
+        ```python
+        # Example API usage
+        response = client.new_feature(params)
+        ```
+      render: text
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd be willing to help implement this feature
+        - label: I can help with testing
+        - label: I can help with documentation
+        - label: I can provide feedback during development
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: This feature aligns with Vectorpenter's goals (local-first RAG)
+          required: true

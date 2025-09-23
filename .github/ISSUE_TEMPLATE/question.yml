@@ -1,0 +1,89 @@
+name: ❓ Question
+description: Ask a question about usage, configuration, or implementation
+title: "[QUESTION] "
+labels: ["question", "needs-response"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about Vectorpenter? We're here to help! 🤝
+        
+        **Before asking:** Please check the README, documentation, and existing issues.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: "How do I... / What's the best way to... / Why does..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Question Category
+      description: What type of question is this?
+      options:
+        - Installation & Setup
+        - Configuration
+        - Usage & CLI
+        - API Integration
+        - Cursor Chat REPL
+        - Hybrid Search Setup
+        - Reranking Configuration
+        - Performance Optimization
+        - Troubleshooting
+        - Architecture & Design
+        - Commercial Use
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide context about your use case or environment
+      placeholder: |
+        - What are you trying to achieve?
+        - What have you tried so far?
+        - Any relevant environment details?
+
+  - type: textarea
+    id: attempted
+    attributes:
+      label: What I've Tried
+      description: What have you already attempted?
+      placeholder: "I've tried... / I looked at... / I searched for..."
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Relevant Code/Configuration
+      description: Any relevant code, configuration, or commands (remove sensitive data!)
+      placeholder: |
+        ```bash
+        # Commands you're running
+        vectorpenter ask "question" --hybrid
+        ```
+        
+        ```python
+        # Code you're using
+        from vectorpenter import something
+        ```
+      render: text
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have read the README and documentation
+          required: true
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: I have removed all sensitive information (API keys, passwords)
+          required: true
