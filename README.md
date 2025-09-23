@@ -14,7 +14,7 @@ Vectorpenter is a **local AI Fabric** you can pull into Cursor. Drop files into 
 ## Quick start
 ```bash
 # 1) Clone
-# git clone https://github.com/<you>/vectorpenter.git && cd vectorpenter
+# git clone https://github.com/doshirush1901/Vectorpenter.git && cd vectorpenter
 
 # 2) Setup env
 cp env.example .env
