@@ -83,9 +83,9 @@ vectorpenter/
 # LLMs & Embeddings
 OPENAI_API_KEY=
 
-# Reranking (priority: Voyage → Cohere)
+# Reranking Service
+# Voyage AI is the reranker (model: rerank-2)
 VOYAGE_API_KEY=
-COHERE_API_KEY=
 
 # Vector DB
 PINECONE_API_KEY=
@@ -128,7 +128,7 @@ def cmd_ask(q: str, k: int = 12, hybrid: bool = False, rerank: bool = False):
     snippets = hydrate_matches(matches)
     
     if rerank:
-        snippets = rerank(q, snippets)  # Voyage → Cohere → identity
+        snippets = rerank(q, snippets)  # Voyage AI rerank-2
         search_type += "+rerank"
     
     pack = build_context(snippets)
@@ -195,40 +195,28 @@ def hybrid_merge(keyword_results: List[Dict], vector_results: List[Dict], k: int
 ### `rag/reranker.py` (Core Differentiator)
 ```python
 def rerank(question: str, snippets: List[Dict]) -> List[Dict]:
-    """Core differentiator: Voyage → Cohere → identity fallback"""
+    """Core differentiator: Voyage AI rerank-2 model"""
     if not snippets:
         return snippets
     
-    # Try Voyage AI first
+    # Check if Voyage AI is configured
     if settings.voyage_api_key:
         try:
+            logger.info("Reranking with Voyage (rerank-2)")
             return _voyage_rerank(question, snippets)
         except Exception as e:
-            logger.warning(f"Voyage failed: {e}")
-    
-    # Fallback to Cohere
-    if settings.cohere_api_key:
-        try:
-            return _cohere_rerank(question, snippets)
-        except Exception as e:
-            logger.warning(f"Cohere failed: {e}")
-    
-    # Identity fallback
-    logger.info("No reranking available, using original order")
-    return snippets
+            logger.warning(f"Voyage reranking failed: {e}")
+            logger.info("Falling back to original order")
+            return snippets
+    else:
+        logger.info("No VOYAGE_API_KEY set, skipping rerank")
+        return snippets
 
 def _voyage_rerank(question: str, snippets: List[Dict]) -> List[Dict]:
     import voyageai
     client = voyageai.Client(api_key=settings.voyage_api_key)
     documents = [s['text'] for s in snippets]
     result = client.rerank(query=question, documents=documents, model="rerank-2")
-    return [snippets[r.index] for r in result.results]
-
-def _cohere_rerank(question: str, snippets: List[Dict]) -> List[Dict]:
-    import cohere
-    client = cohere.Client(api_key=settings.cohere_api_key)
-    documents = [s['text'] for s in snippets]
-    result = client.rerank(model="rerank-english-v3.0", query=question, documents=documents)
     return [snippets[r.index] for r in result.results]
 ```
 
@@ -245,7 +233,6 @@ class Settings:
     # BYOK - no defaults, no vendor lock-in
     openai_api_key: str | None = os.getenv("OPENAI_API_KEY")
     voyage_api_key: str | None = os.getenv("VOYAGE_API_KEY")
-    cohere_api_key: str | None = os.getenv("COHERE_API_KEY")
     pinecone_api_key: str | None = os.getenv("PINECONE_API_KEY")
     typesense_api_key: str | None = os.getenv("TYPESENSE_API_KEY")
     
@@ -378,7 +365,7 @@ if __name__ == "__main__":
 | Feature | txtai | Verba | Pinecone Demos | **Vectorpenter** |
 |---------|--------|--------|----------------|------------------|
 | **Hybrid Search** | ❌ | ❌ | ❌ | ✅ Native --hybrid |
-| **Smart Reranking** | ❌ | ❌ | ❌ | ✅ Multi-provider fallback |
+| **Smart Reranking** | ❌ | ❌ | ❌ | ✅ Voyage AI rerank-2 |
 | **Local-First** | ❌ | ❌ | ❌ | ✅ SQLite, laptop-ready |
 | **BYOK** | ❌ | ❌ | ❌ | ✅ No vendor lock-in |
 | **CLI + REPL + API** | Partial | ❌ | ❌ | ✅ Three interfaces |

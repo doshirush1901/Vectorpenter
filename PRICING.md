@@ -26,7 +26,7 @@ Choose the right plan for your needs, from open source to enterprise solutions.
 | FastAPI Server | ✅ | ✅ | ✅ | ✅ |
 | Cursor Chat REPL | ✅ | ✅ | ✅ | ✅ |
 | **Hybrid Search (Typesense)** | ❌ | ✅ | ✅ | ✅ |
-| **Smart Reranking (Voyage/Cohere)** | ❌ | ✅ | ✅ | ✅ |
+| **Smart Reranking (Voyage AI)** | ❌ | ✅ | ✅ | ✅ |
 | **Advanced Chunking Strategies** | ❌ | ✅ | ✅ | ✅ |
 | **Multi-language Support** | ❌ | ✅ | ✅ | ✅ |
 
@@ -86,7 +86,7 @@ cd vectorpenter && pip install -r requirements.txt
 ✅ **Everything in Community, plus:**
 - **Commercial license** (no copyleft restrictions)
 - **Hybrid search** with Typesense integration
-- **Smart reranking** with Voyage AI and Cohere
+- **Smart reranking** with Voyage AI (rerank-2)
 - **Advanced chunking** strategies
 - **Multi-language** document support
 - **Email support** (48-hour response time)

@@ -6,8 +6,8 @@ Vectorpenter is a **local AI Fabric** you can pull into Cursor. Drop files into 
 
 - **Local-first**: runs on your machine, no server required.
 - **Hybrid search**: combines vector similarity (Pinecone) + keyword matching (Typesense).
-- **Smart reranking**: Voyage AI → Cohere → identity fallback for better results.
-- **Bring-your-own-keys**: OpenAI / Pinecone / (optional) Voyage, Cohere, Typesense.
+- **Smart reranking**: Voyage AI rerank-2 model for better results.
+- **Bring-your-own-keys**: OpenAI / Pinecone / (optional) Voyage, Typesense.
 - **RAG-native**: robust chunking, embeddings, retrieval, citations.
 - **Company-friendly**: each teammate sets their own keys & namespace.
 
@@ -52,9 +52,9 @@ python -m apps.cursor_chat
 # LLMs & Embeddings
 OPENAI_API_KEY=
 
-# Reranking Services (optional, priority: Voyage → Cohere)
+# Reranking Service (optional)
+# Voyage AI is the reranker (model: rerank-2)
 VOYAGE_API_KEY=
-COHERE_API_KEY=
 
 # Vector DB (Pinecone)
 PINECONE_API_KEY=
@@ -119,6 +119,7 @@ curl -X POST "http://localhost:8000/query" \
 - **Pinecone** as the default vector index for ease of team usage; **SQLite** for local state (Postgres ready).
 - **RAG prompt** enforces citations and rejects hallucinations: if context is insufficient, it tells you what's missing.
 - **Hybrid-ready**: optional keyword + vector + rerank for high precision.
+- **Voyage AI**: built-in reranker (model: rerank-2). If not configured, reranking is skipped.
 
 ## Safety & privacy
 - Your files stay local. Only text chunks/embeddings go to Pinecone.

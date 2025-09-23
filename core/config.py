@@ -10,7 +10,6 @@ class Settings:
     # LLM and embedding APIs
     openai_api_key: str | None = os.getenv("OPENAI_API_KEY")
     voyage_api_key: str | None = os.getenv("VOYAGE_API_KEY")
-    cohere_api_key: str | None = os.getenv("COHERE_API_KEY")
     
     # Vector database (Pinecone)
     pinecone_api_key: str | None = os.getenv("PINECONE_API_KEY")

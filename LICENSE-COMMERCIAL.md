@@ -29,7 +29,7 @@ This license permits:
 #### Professional License - $49/developer/month
 - Up to 10 developers
 - Hybrid search capabilities
-- Smart reranking features
+- Smart reranking with Voyage AI
 - Email support (48h response)
 - Commercial use rights
 
