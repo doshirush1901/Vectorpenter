@@ -1,30 +1,31 @@
 # 🏗️ Machinecraft AI Agent Architecture
 
-## 🔨 **VP Core + Department Agents Strategy**
+## 🔨 **VP Template + Department Customization Strategy**
 
 ```
                     🏗️ MACHINECRAFT AI ECOSYSTEM 🏗️
                                       
-                         🔨 VP CORE (MCP Server)
+                         📚 VP TEMPLATE
                       "The Carpenter of Context"
                               │
                     ┌─────────┼─────────┐
+                    │   Copy & Customize │
                     │         │         │
               ┌─────────┐ ┌─────────┐ ┌─────────┐
               │VP-Sales │ │VP-Finance│ │VP-Eng   │
-              │Agent    │ │Agent     │ │Agent    │
+              │(Standalone)│(Standalone)│(Standalone)│
               └─────────┘ └─────────┘ └─────────┘
                     │         │         │
               ┌─────────┐ ┌─────────┐ ┌─────────┐
               │VP-Mktg  │ │VP-HR     │ │VP-Supply│
-              │Agent    │ │Agent     │ │Agent    │
+              │(Standalone)│(Standalone)│(Standalone)│
               └─────────┘ └─────────┘ └─────────┘
 ```
 
 ## 🎯 **Architecture Philosophy**
 
-### **🔨 VP Core: The Foundation**
-VP provides the **universal document intelligence** that all departments need:
+### **📚 VP Template: The Foundation**
+VP provides the **universal document intelligence template** that all departments can copy and customize:
 - **Document Processing**: Parse, translate, OCR any format
 - **Hybrid Search**: Vector + keyword search across all documents
 - **Smart Reranking**: AI-powered result optimization
@@ -32,12 +33,12 @@ VP provides the **universal document intelligence** that all departments need:
 - **Multi-Language**: Auto-translation for global operations
 - **Web Intelligence**: Screenshot capture and grounding
 
-### **🎭 Department Agents: The Specialists**
-Each agent **inherits VP's capabilities** but adds **department-specific intelligence**:
+### **🎯 Department Customization: The Specialists**
+Each department **copies VP template** and adds **department-specific intelligence**:
 - **Specialized Prompts**: Domain-specific analysis and insights
-- **Custom Filters**: Focus on relevant document types
-- **Department Context**: Understanding of specific business processes
-- **Targeted Integrations**: Connect to department-specific tools
+- **Custom Integrations**: Connect to department-specific tools (CRM, ERP, etc.)
+- **Independent Deployment**: Each agent runs as standalone service
+- **Custom Namespaces**: Isolated data per department
 
 ---
 
