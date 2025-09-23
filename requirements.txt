@@ -29,6 +29,9 @@ pyjwt>=2.8.0
 cryptography>=41.0.0
 click>=8.1.0
 
+# MCP (Model Context Protocol)
+mcp>=1.0.0
+
 # GCP services (optional)
 google-cloud-documentai>=2.28.0
 google-cloud-storage>=2.16.0

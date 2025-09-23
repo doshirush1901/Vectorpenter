@@ -1,8 +1,9 @@
 # 🔨 Vectorpenter
+
 ```
                     ╭─────────────────────────────────────────╮
-                    │  🏗️  The Carpenter of Context           │
-                    │     Building Vectors into Memory        │
+                    │              🔨 VP 🔨                   │
+                    │        The Carpenter of Context         │
                     │                                         │
                     │  ⚡ Local-First • 🧠 AI-Powered         │
                     │  🔍 Hybrid Search • 🌍 Multi-Language   │
@@ -11,9 +12,9 @@
 
 <div align="center">
 
-**🎌 Konnichiwa! Meet your AI document companion!**
+**Meet VP - Your AI Document Carpenter!**
 
-*Transform any document into searchable knowledge with the power of AI*
+*Transforms any document into searchable knowledge with precision and care*
 
 [![GitHub stars](https://img.shields.io/github/stars/doshirush1901/Vectorpenter?style=social)](https://github.com/doshirush1901/Vectorpenter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -23,174 +24,177 @@
 
 ---
 
-## 🌸 **What is Vectorpenter?**
+## 🎨 **What is Vectorpenter?**
 
 ```
-    📚 Your Documents          🔨 Vectorpenter          🤖 AI Knowledge
+    📚 Your Documents          🔨 VP's Workshop          🤖 Organized Knowledge
          ↓                           ↓                        ↓
    ┌─────────────┐            ┌─────────────┐         ┌─────────────┐
    │  📄 PDFs    │   ────→    │  🧠 Smart   │  ────→  │ 💬 Natural  │
-   │  📊 Excel   │            │     AI      │         │   Language  │
-   │  🖼️ Images  │            │  Processing │         │   Answers   │
-   │  🌐 Websites│            │             │         │             │
-   └─────────────┘            └─────────────┘         └─────────────┘
-        Drop files              Magic happens           Ask questions
+   │  📊 Excel   │            │  Processing │         │   Language  │
+   │  🖼️ Images  │            │             │         │   Answers   │
+   │  🌐 Websites│            │  🔨 VP's    │         │             │
+   └─────────────┘            │   Magic     │         └─────────────┘
+        Drop files             └─────────────┘           Ask questions
 ```
 
-Vectorpenter is your **local AI companion** that transforms documents into intelligent, searchable knowledge. Think of it as having a super-smart librarian who reads everything and can answer any question about your documents! 📖✨
+**VP** is your **local AI carpenter** who transforms scattered documents into an organized, searchable knowledge base. Like a master craftsman, VP knows exactly which tool to use for each task - local processing for privacy and speed, cloud services when they add real value.
 
 ---
 
-## 🚀 **Quick Start Adventure**
+## 🚀 **Quick Start with VP**
 
 ### **⚡ 3-Minute Setup**
 
 ```bash
-# 🎯 Step 1: Get Vectorpenter
+# 🎯 Step 1: Get VP's workshop
 git clone https://github.com/doshirush1901/Vectorpenter.git
 cd vectorpenter
 
-# 🔧 Step 2: Setup (copy-paste magic!)
+# 🔧 Step 2: Setup VP's tools
 cp env.example .env
 # ✏️ Edit .env with your OpenAI + Pinecone keys
 
-# 📦 Step 3: Install
-pip install -e .  # Installs vectorpenter command
+# 📦 Step 3: Install VP's dependencies
+pip install -e .
 
-# 🐳 Step 4: Start local services (optional)
+# 🐳 Step 4: Start VP's services (optional)
 make up  # Starts Typesense for hybrid search
 
-# 🎉 Step 5: Start chatting!
+# 🎉 Step 5: Meet VP!
 python -m apps.cursor_chat
 ```
 
-### **🎌 Your First Journey**
+### **🔨 VP's First Project**
 
 ```
-    🗂️ Drop Documents        ⚡ Process        🤔 Ask Questions
-         ↓                      ↓                  ↓
-   📁 data/inputs/         vectorpenter      "What's the main
-   ├── report.pdf          ingest + index     topic here?"
-   ├── notes.md                 ↓                  ↓
-   └── image.png          🧠 AI Magic        💬 Smart Answer
-                         happening...        with citations!
+    🗂️ Gather Materials      ⚡ VP Works His Magic      🤔 Ask VP Questions
+         ↓                           ↓                        ↓
+   📁 data/inputs/           vectorpenter ingest        "What's the main
+   ├── report.pdf           vectorpenter index          topic here?"
+   ├── notes.md                     ↓                        ↓
+   └── image.png            🧠 VP Builds Memory       💬 VP's Expert Answer
+                           "Ready for questions!"      with citations
 ```
 
 ---
 
-## 🌟 **Superpowers Unlocked**
+## 🔨 **VP's Superpowers**
 
 <div align="center">
 
-### 🔍 **Hybrid Search Sensei**
-*Combines vector similarity + keyword matching for perfect results*
+### 🔍 **Hybrid Vision**
+*VP sees with both vector similarity and keyword precision*
 
-### 🌍 **Multilingual Ninja** 
-*Auto-translates any language → English for better understanding*
+### 🌍 **Universal Understanding** 
+*VP reads any language and translates for perfect comprehension*
 
-### 📸 **Web Snapshot Wizard**
-*Capture any webpage directly into your knowledge base*
+### 📸 **Web Capture Mastery**
+*VP can capture and analyze any webpage instantly*
 
-### 🧠 **Smart PDF Samurai**
-*Automatically upgrades to cloud OCR for scanned documents*
+### 🧠 **Smart Decision Making**
+*VP chooses local or cloud processing based on what works best*
 
-### 🔗 **Context Expansion Master**
-*Includes neighboring text chunks for complete understanding*
+### 🔗 **Context Weaving**
+*VP connects related information for complete understanding*
 
 </div>
 
 ---
 
-## 🎨 **The Magic Behind the Scenes**
+## 🏗️ **VP's Workshop Architecture**
 
 ```
-                     🎌 VECTORPENTER PROCESSING DOJO 🎌
+                         🏗️ VP'S VECTORPENTER WORKSHOP 🏗️
                                       
-    📄 Document Arrives                    🤖 User Asks Question
-         ↓                                        ↓
-    ┌─────────────┐                      ┌─────────────┐
-    │ 🔍 Smart    │                      │ 🎯 Hybrid   │
-    │   Parser    │ ──┐              ┌── │   Search    │
-    │             │   │              │   │             │
-    │ • Local     │   │              │   │ • Vector    │
-    │ • DocAI     │   │              │   │ • Keyword   │
-    │ • OCR       │   │              │   │ • Rerank    │
-    └─────────────┘   │              │   └─────────────┘
-                      ↓              ↑
-    ┌─────────────┐   │              │   ┌─────────────┐
-    │ 🌍 Auto     │   │              │   │ 🔗 Late     │
-    │ Translate   │ ──┤              ├── │ Windowing   │
-    │             │   │              │   │             │
-    │ • Detect    │   │              │   │ • Neighbors │
-    │ • Convert   │   │              │   │ • Context   │
-    │ • Preserve  │   │              │   │ • Flow      │
-    └─────────────┘   │              │   └─────────────┘
-                      ↓              ↑
-    ┌─────────────┐   │   🧠 BRAIN   │   ┌─────────────┐
-    │ ⚡ Chunk &  │   │              │   │ 🌐 Google   │
-    │   Embed     │ ──┤   VECTOR     ├── │ Grounding   │
-    │             │   │   MEMORY     │   │             │
-    │ • OpenAI    │   │              │   │ • Fallback  │
-    │ • Cache     │   │   (SQLite)   │   │ • External  │
-    │ • Store     │   │              │   │ • Current   │
-    └─────────────┘   │              │   └─────────────┘
-                      ↓              ↑
-    ┌─────────────┐                      ┌─────────────┐
-    │ 📦 Archive  │                      │ 💬 Generate │
-    │   (GCS)     │                      │   Answer    │
-    │             │                      │             │
-    │ • Raw       │                      │ • OpenAI    │
-    │ • Translated│                      │ • Vertex    │
-    │ • Audit     │                      │ • Citations │
-    └─────────────┘                      └─────────────┘
+    📄 Document Arrives                    🤖 You Ask VP
+         ↓                                      ↓
+    ┌─────────────┐                    ┌─────────────┐
+    │ 🔨 Smart    │                    │ 🎯 Hybrid   │
+    │   Parser    │ ──┐            ┌── │   Search    │
+    │             │   │            │   │             │
+    │ • Local     │   │            │   │ • Vector    │
+    │ • DocAI     │   │            │   │ • Keyword   │
+    │ • OCR       │   │            │   │ • Rerank    │
+    └─────────────┘   │            │   └─────────────┘
+                      ↓            ↑
+    ┌─────────────┐   │            │   ┌─────────────┐
+    │ 🌍 Auto     │   │            │   │ 🔗 Context  │
+    │ Translate   │ ──┤    🧠 VP   ├── │ Expansion   │
+    │             │   │   MEMORY   │   │             │
+    │ • Detect    │   │            │   │ • Neighbors │
+    │ • Convert   │   │  (SQLite)  │   │ • Flow      │
+    │ • Preserve  │   │            │   │ • Continuity│
+    └─────────────┘   │            │   └─────────────┘
+                      ↓            ↑
+    ┌─────────────┐   │            │   ┌─────────────┐
+    │ ⚡ Embed &  │   │            │   │ 🌐 Web      │
+    │   Store     │ ──┤            ├── │ Grounding   │
+    │             │   │            │   │             │
+    │ • OpenAI    │   │            │   │ • Google    │
+    │ • Cache     │   │            │   │ • Fallback  │
+    │ • Index     │   │            │   │ • Current   │
+    └─────────────┘   │            │   └─────────────┘
+                      ↓            ↑
+    ┌─────────────┐                    ┌─────────────┐
+    │ 📦 Archive  │                    │ 💬 Craft    │
+    │   (GCS)     │                    │   Answer    │
+    │             │                    │             │
+    │ • Raw       │                    │ • OpenAI    │
+    │ • Translated│                    │ • Vertex    │
+    │ • Audit     │                    │ • Citations │
+    └─────────────┘                    └─────────────┘
 ```
 
 ---
 
-## 🎯 **Choose Your Adventure**
+## 🎯 **VP's Workshop Modes**
 
 <table>
 <tr>
 <td width="33%" align="center">
 
-### 🏠 **Local Sensei**
-*Privacy-first, runs on your laptop*
+### 🏠 **Local Workshop**
+*VP's private studio*
 
 ```
 🔒 Private
 ⚡ Fast  
 💰 Free
+🔨 Precise
 ```
 
-**Perfect for**: Personal projects, sensitive data, offline work
+**VP says**: *"Your secrets stay in your workshop"*
 
 </td>
 <td width="33%" align="center">
 
-### ☁️ **Cloud Ninja** 
-*Smart cloud features when needed*
+### ☁️ **Cloud-Enhanced Workshop** 
+*VP's expanded capabilities*
 
 ```
 🌍 Global
 🧠 Smart
 📈 Scalable
+🎯 Intelligent
 ```
 
-**Perfect for**: Teams, multi-language docs, web content
+**VP says**: *"I use cloud tools when they make me better"*
 
 </td>
 <td width="33%" align="center">
 
-### 🏢 **Enterprise Samurai**
-*Production-ready with full features*
+### 🏢 **Enterprise Forge**
+*VP's professional operation*
 
 ```
 🛡️ Secure
 📊 Analytics
 🎯 Professional
+⚖️ Compliant
 ```
 
-**Perfect for**: Companies, compliance, commercial use
+**VP says**: *"Built for serious work, serious results"*
 
 </td>
 </tr>
@@ -198,120 +202,57 @@ python -m apps.cursor_chat
 
 ---
 
-## 🎌 **Meet Your AI Companions**
+## 🔨 **VP's Tool Belt**
 
-<div align="center">
-
-### 🤖 **Vecto-chan** 
-*Your friendly embedding specialist*
-> *"I turn your words into mathematical magic! ✨"*
-
-### 🔍 **Search-kun**
-*The hybrid search master*
-> *"I find exactly what you're looking for! 🎯"*
-
-### 🌸 **Context-san**
-*The wise context builder*
-> *"I weave your knowledge into beautiful stories! 📚"*
-
-</div>
-
----
-
-## 🎮 **Command Palette**
-
-<table>
-<tr>
-<td width="50%">
-
-### 📚 **Knowledge Management**
+### **📚 Knowledge Management**
 
 ```bash
-# 📥 Ingest documents
+# 📥 VP ingests your documents
 vectorpenter ingest ./data/inputs
 
-# ⚡ Build search index  
+# ⚡ VP builds his memory index
 vectorpenter index
 
-# 🔍 Ask questions
+# 🔍 Ask VP anything
 vectorpenter ask "What's the summary?"
 ```
 
-</td>
-<td width="50%">
-
-### 🌟 **Advanced Techniques**
+### **🌟 VP's Advanced Techniques**
 
 ```bash
-# 🥷 Hybrid search + reranking
+# 🎯 VP's hybrid vision + reranking
 vectorpenter ask "complex query" \
   --hybrid --rerank --k 20
 
-# 📸 Capture webpage
+# 📸 VP captures the web
 vectorpenter snap --url "https://example.com"
 
-# 💬 Interactive chat
+# 💬 Chat with VP directly
 python -m apps.cursor_chat
 ```
 
-</td>
-</tr>
-</table>
-
 ---
 
-## 🎯 **Power-Up Examples**
-
-### **🏢 Business Intelligence**
-```bash
-# Capture competitor website
-vectorpenter snap --url "https://competitor.com/pricing"
-
-# Analyze with your internal docs
-vectorpenter ask "How do their prices compare to ours?" --hybrid --rerank
-```
-
-### **📚 Research Assistant**
-```bash
-# Process research papers (any language)
-vectorpenter ingest ./research_papers/  # Auto-translates to English
-
-# Get insights with web grounding
-vectorpenter ask "What are the latest trends?" --hybrid
-# Combines your docs + current web information
-```
-
-### **🌍 Global Team Collaboration**
-```bash
-# Team in Japan uploads Japanese docs
-vectorpenter ingest ./japanese_docs/  # Auto-translates
-
-# Team in US asks questions in English
-vectorpenter ask "What did the Tokyo team report?"
-# Seamlessly searches translated content
-```
-
----
-
-## 🎪 **Interactive Modes**
+## 🎪 **VP's Workshop Interfaces**
 
 <table>
 <tr>
 <td width="33%" align="center">
 
-### 💬 **Chat Dojo**
-*Interactive conversation mode*
+### 💬 **Chat with VP**
+*Direct conversation mode*
 
 ```bash
 python -m apps.cursor_chat
 ```
 
 ```
-🤖 Ask me anything: What's our revenue?
+🔨 VP: What can I help you build today?
 
-📖 ANSWER:
-Based on Q3 report [#1], revenue 
-increased 23% to $2.4M...
+You: What's our revenue?
+
+🔨 VP: Based on Q3 report [#1], 
+revenue increased 23% to $2.4M...
 
 📚 Sources: 3 chunks
 ```
@@ -319,8 +260,8 @@ increased 23% to $2.4M...
 </td>
 <td width="33%" align="center">
 
-### 🌐 **API Shrine**
-*RESTful web service*
+### 🌐 **VP's API Workshop**
+*RESTful service interface*
 
 ```bash
 uvicorn apps.api:app --reload
@@ -338,8 +279,8 @@ POST /query
 </td>
 <td width="33%" align="center">
 
-### ⚡ **CLI Temple** 
-*Command-line interface*
+### ⚡ **VP's Command Center** 
+*Direct command interface*
 
 ```bash
 vectorpenter ask \
@@ -348,7 +289,7 @@ vectorpenter ask \
 ```
 
 ```
-=== ANSWER (hybrid+rerank) ===
+🔨 VP's ANSWER (hybrid+rerank):
 Our competitive advantages...
 📚 Local Sources: 5 chunks
 🌐 External Sources: 2 Google results
@@ -360,18 +301,51 @@ Our competitive advantages...
 
 ---
 
-## 🏗️ **Technical Dojo**
+## 🎯 **VP's Masterwork Examples**
 
-### **🎌 The Sacred Architecture**
+### **🏢 Business Intelligence with VP**
+```bash
+# VP captures competitor intelligence
+vectorpenter snap --url "https://competitor.com/pricing"
+
+# VP analyzes with your internal docs
+vectorpenter ask "How do their prices compare to ours?" --hybrid --rerank
+```
+
+### **📚 VP's Research Assistant Mode**
+```bash
+# VP processes research papers (any language)
+vectorpenter ingest ./research_papers/  # VP auto-translates
+
+# VP provides insights with web grounding
+vectorpenter ask "What are the latest trends?" --hybrid
+# VP combines your docs + current web information
+```
+
+### **🌍 VP's Global Team Support**
+```bash
+# Tokyo team uploads Japanese docs
+vectorpenter ingest ./japanese_docs/  # VP translates
+
+# US team asks questions in English  
+vectorpenter ask "What did the Tokyo team report?"
+# VP seamlessly searches translated content
+```
+
+---
+
+## 🏗️ **VP's Technical Blueprint**
+
+### **🔨 The VP Architecture**
 
 ```
-                          🏯 VECTORPENTER CASTLE 🏯
+                          🏗️ VP'S WORKSHOP BLUEPRINT 🏗️
                                      
-    🚪 apps/              🏛️ core/               🎯 rag/
+    🚪 interfaces/        🧠 core/               🎯 rag/
     ├── 💬 cli.py         ├── ⚙️ config.py       ├── 🔍 retriever.py
     ├── 🌐 api.py         ├── 📊 monitoring.py   ├── ⚡ reranker.py  
-    └── 🎮 cursor_chat.py ├── 🛡️ resilience.py   ├── 🧠 generator.py
-                          └── 🔒 validation.py   └── 🔗 context_builder.py
+    ├── 🎮 cursor_chat.py ├── 🛡️ resilience.py   ├── 🧠 generator.py
+    └── 🔧 admin.py       └── 🔒 validation.py   └── 🔗 context_builder.py
                                      
     🌍 gcp/               🔍 search/             📁 ingest/
     ├── 📄 docai.py       ├── 🔤 typesense.py    ├── 📂 loaders.py
@@ -381,10 +355,10 @@ Our competitive advantages...
     └── 📦 gcs.py
 ```
 
-### **🎨 Data Flow Masterpiece**
+### **🎨 VP's Data Flow Masterpiece**
 
 ```
-🎌 THE VECTORPENTER JOURNEY 🎌
+🔨 VP'S VECTORPENTER JOURNEY 🔨
 
 📄 Document → 🔍 Parse → 🌍 Translate → ✂️ Chunk → ⚡ Embed → 🧠 Store
     ↓             ↓          ↓            ↓         ↓        ↓
@@ -393,321 +367,36 @@ Our competitive advantages...
                                                             
 🤔 Question → ⚡ Embed → 🔍 Search → 🔗 Expand → 🌐 Ground → 💬 Answer
     ↓           ↓         ↓          ↓          ↓         ↓
-  Natural    OpenAI    Hybrid    Late      Google   Smart
-  Language   Magic     Vector+   Window    Search   Response
+  Natural    OpenAI    Hybrid    Late      Google   VP's
+  Language   Magic     Vector+   Window    Search   Wisdom
                       Keyword   Context   Fallback  +Citations
 ```
 
 ---
 
-## 🌟 **Superpowers Unlocked**
+## 🌟 **VP's Success Stories**
 
 <div align="center">
 
-### 🔍 **Hybrid Search Sensei**
-*Combines vector similarity + keyword matching for perfect results*
-
-### 🌍 **Multilingual Ninja** 
-*Auto-translates any language → English for better understanding*
-
-### 📸 **Web Snapshot Wizard**
-*Capture any webpage directly into your knowledge base*
-
-### 🧠 **Smart PDF Samurai**
-*Automatically upgrades to cloud OCR for scanned documents*
-
-### 🔗 **Context Expansion Master**
-*Includes neighboring text chunks for complete understanding*
-
-</div>
-
----
-
-## 🎯 **Choose Your Adventure**
-
-<table>
-<tr>
-<td width="33%" align="center">
-
-### 🏠 **Local Sensei**
-*Privacy-first, runs on your laptop*
-
-```
-🔒 Private
-⚡ Fast  
-💰 Free
-```
-
-**Perfect for**: Personal projects, sensitive data, offline work
-
-</td>
-<td width="33%" align="center">
-
-### ☁️ **Cloud Ninja** 
-*Smart cloud features when needed*
-
-```
-🌍 Global
-🧠 Smart
-📈 Scalable
-```
-
-**Perfect for**: Teams, multi-language docs, web content
-
-</td>
-<td width="33%" align="center">
-
-### 🏢 **Enterprise Samurai**
-*Production-ready with full features*
-
-```
-🛡️ Secure
-📊 Analytics
-🎯 Professional
-```
-
-**Perfect for**: Companies, compliance, commercial use
-
-</td>
-</tr>
-</table>
-
----
-
-## 🎌 **Meet Your AI Companions**
-
-<div align="center">
-
-### 🤖 **Vecto-chan** 
-*Your friendly embedding specialist*
-> *"I turn your words into mathematical magic! ✨"*
-
-### 🔍 **Search-kun**
-*The hybrid search master*
-> *"I find exactly what you're looking for! 🎯"*
-
-### 🌸 **Context-san**
-*The wise context builder*
-> *"I weave your knowledge into beautiful stories! 📚"*
-
-</div>
-
----
-
-## 🎮 **Command Palette**
-
-<table>
-<tr>
-<td width="50%">
-
-### 📚 **Knowledge Management**
-
-```bash
-# 📥 Ingest documents
-vectorpenter ingest ./data/inputs
-
-# ⚡ Build search index  
-vectorpenter index
-
-# 🔍 Ask questions
-vectorpenter ask "What's the summary?"
-```
-
-</td>
-<td width="50%">
-
-### 🌟 **Advanced Techniques**
-
-```bash
-# 🥷 Hybrid search + reranking
-vectorpenter ask "complex query" \
-  --hybrid --rerank --k 20
-
-# 📸 Capture webpage
-vectorpenter snap --url "https://example.com"
-
-# 💬 Interactive chat
-python -m apps.cursor_chat
-```
-
-</td>
-</tr>
-</table>
-
----
-
-## 🎯 **Power-Up Examples**
-
-### **🏢 Business Intelligence**
-```bash
-# Capture competitor website
-vectorpenter snap --url "https://competitor.com/pricing"
-
-# Analyze with your internal docs
-vectorpenter ask "How do their prices compare to ours?" --hybrid --rerank
-```
-
-### **📚 Research Assistant**
-```bash
-# Process research papers (any language)
-vectorpenter ingest ./research_papers/  # Auto-translates to English
-
-# Get insights with web grounding
-vectorpenter ask "What are the latest trends?" --hybrid
-# Combines your docs + current web information
-```
-
-### **🌍 Global Team Collaboration**
-```bash
-# Team in Japan uploads Japanese docs
-vectorpenter ingest ./japanese_docs/  # Auto-translates
-
-# Team in US asks questions in English
-vectorpenter ask "What did the Tokyo team report?"
-# Seamlessly searches translated content
-```
-
----
-
-## 🎪 **Interactive Modes**
-
-<table>
-<tr>
-<td width="33%" align="center">
-
-### 💬 **Chat Dojo**
-*Interactive conversation mode*
-
-```bash
-python -m apps.cursor_chat
-```
-
-```
-🤖 Ask me anything: What's our revenue?
-
-📖 ANSWER:
-Based on Q3 report [#1], revenue 
-increased 23% to $2.4M...
-
-📚 Sources: 3 chunks
-```
-
-</td>
-<td width="33%" align="center">
-
-### 🌐 **API Shrine**
-*RESTful web service*
-
-```bash
-uvicorn apps.api:app --reload
-```
-
-```json
-POST /query
-{
-  "q": "What's our strategy?",
-  "hybrid": true,
-  "rerank": true
-}
-```
-
-</td>
-<td width="33%" align="center">
-
-### ⚡ **CLI Temple** 
-*Command-line interface*
-
-```bash
-vectorpenter ask \
-  "competitive analysis" \
-  --hybrid --rerank
-```
-
-```
-=== ANSWER (hybrid+rerank) ===
-Our competitive advantages...
-📚 Local Sources: 5 chunks
-🌐 External Sources: 2 Google results
-```
-
-</td>
-</tr>
-</table>
-
----
-
-## 🌈 **Special Abilities**
-
-### 📸 **Web Capture Jutsu**
-
-```bash
-# 🌸 Capture the essence of any webpage
-vectorpenter snap --url "https://news.ycombinator.com"
-
-# 🔍 Make it searchable instantly
-vectorpenter ingest data/inputs
-vectorpenter ask "What's trending in tech?"
-```
-
-### 🌍 **Universal Language Mastery**
-
-```bash
-# 🎋 Process documents in any language
-# Vectorpenter automatically detects and translates!
-
-vectorpenter ingest ./japanese_docs/    # 日本語 → English
-vectorpenter ingest ./spanish_reports/  # Español → English  
-vectorpenter ask "What did all teams report?"  # 🌍 Global insights
-```
-
----
-
-## 🏗️ **Technical Dojo**
-
-### **🎌 The Sacred Architecture**
-
-```
-                          🏯 VECTORPENTER CASTLE 🏯
-                                     
-    🚪 apps/              🏛️ core/               🎯 rag/
-    ├── 💬 cli.py         ├── ⚙️ config.py       ├── 🔍 retriever.py
-    ├── 🌐 api.py         ├── 📊 monitoring.py   ├── ⚡ reranker.py  
-    └── 🎮 cursor_chat.py ├── 🛡️ resilience.py   ├── 🧠 generator.py
-                          └── 🔒 validation.py   └── 🔗 context_builder.py
-                                     
-    🌍 gcp/               🔍 search/             📁 ingest/
-    ├── 📄 docai.py       ├── 🔤 typesense.py    ├── 📂 loaders.py
-    ├── 🌐 vertex.py      └── 🤝 hybrid.py       ├── 🔨 parsers.py
-    ├── 🌍 translation.py                        ├── ✂️ chunkers.py
-    ├── 🔍 search.py                             └── ⚡ pipeline.py
-    └── 📦 gcs.py
-```
-
----
-
-## 🌟 **Success Stories**
-
-<div align="center">
-
-### 🏢 **"Transformed our document workflow!"**
-*"Vectorpenter processes our multilingual contracts automatically. Game changer!"*
+### 🏢 **"VP transformed our workflow!"**
+*"VP processes our multilingual contracts automatically. True craftsmanship!"*
 **— Manufacturing Company CEO**
 
-### 📚 **"Research made simple!"**
-*"I drop PDFs, ask questions, get instant insights with citations. Magic!"*
+### 📚 **"VP makes research effortless!"**
+*"I drop PDFs, ask questions, VP delivers insights with citations. Pure magic!"*
 **— Graduate Student**
 
-### 🌐 **"Competitive intelligence on autopilot!"**
-*"Snap competitor sites, analyze with our docs, get strategic insights!"*
+### 🌐 **"VP provides competitive intelligence!"**
+*"VP captures competitor sites, analyzes with our docs, delivers strategy!"*
 **— Marketing Director**
 
 </div>
 
 ---
 
-## 🎁 **Getting Started Gifts**
+## 🎁 **VP's Service Tiers**
 
-### **🎌 Free Tier** 
+### **🔨 Apprentice Tier (Free)** 
 ```
 ✅ All core features
 ✅ Local processing  
@@ -715,7 +404,7 @@ vectorpenter ask "What did all teams report?"  # 🌍 Global insights
 ✅ MIT License
 ```
 
-### **💼 Professional** 
+### **🏗️ Craftsman Tier (Professional)** 
 ```
 ✅ Hybrid search
 ✅ Smart reranking
@@ -723,7 +412,7 @@ vectorpenter ask "What did all teams report?"  # 🌍 Global insights
 ✅ Email support
 ```
 
-### **🏢 Enterprise**
+### **🏛️ Master Builder Tier (Enterprise)**
 ```
 ✅ All features
 ✅ Priority support
@@ -731,21 +420,20 @@ vectorpenter ask "What did all teams report?"  # 🌍 Global insights
 ✅ SLA guarantees
 ```
 
-[**🚀 Start Free →**](https://github.com/doshirush1901/Vectorpenter) | [**💼 Go Pro →**](mailto:sales@machinecraft.tech) | [**🏢 Enterprise →**](mailto:enterprise@machinecraft.tech)
+[**🚀 Start Free →**](https://github.com/doshirush1901/Vectorpenter) | [**🏗️ Go Pro →**](mailto:sales@machinecraft.tech) | [**🏛️ Enterprise →**](mailto:enterprise@machinecraft.tech)
 
 ---
 
-## 🎪 **Community Dojo**
+## 🤝 **Join VP's Workshop**
 
 <div align="center">
 
-### 🤝 **Join the Adventure**
+### 🔨 **Become VP's Apprentice**
 
 [![GitHub Issues](https://img.shields.io/github/issues/doshirush1901/Vectorpenter)](https://github.com/doshirush1901/Vectorpenter/issues)
 [![GitHub PRs](https://img.shields.io/github/issues-pr/doshirush1901/Vectorpenter)](https://github.com/doshirush1901/Vectorpenter/pulls)
-[![Discord](https://img.shields.io/badge/Discord-Join%20Chat-7289da)](https://discord.gg/vectorpenter)
 
-**🌸 Contributing**: Read our [Contribution Guide](CONTRIBUTING.md)  
+**🔨 Contributing**: Read our [Contribution Guide](CONTRIBUTING.md)  
 **🛡️ Security**: Report issues via [Security Policy](SECURITY.md)  
 **💰 Commercial**: Check our [Pricing Guide](PRICING.md)
 
@@ -753,105 +441,111 @@ vectorpenter ask "What did all teams report?"  # 🌍 Global insights
 
 ---
 
-## 🎌 **The Vectorpenter Philosophy**
+## 🔨 **VP's Philosophy**
 
 <div align="center">
 
 > *"Like a master carpenter who knows exactly which tool to use for each task,*  
-> *Vectorpenter intelligently chooses the right AI service for each document.*  
+> *I intelligently choose the right AI service for each document.*  
 > *Local when possible, cloud when beneficial, always with respect for your privacy."*
+> 
+> **— VP, The Carpenter of Context**
 
-**🔨 Built with ❤️ by [Machinecraft Technologies](https://machinecraft.tech)**
+**🔨 Built with precision by [Machinecraft Technologies](https://machinecraft.tech)**
 
 </div>
 
 ---
 
-## 🌸 **Quick Reference Card**
+## 🎯 **VP's Workshop Commands**
 
 <details>
-<summary>📋 <strong>Command Cheat Sheet</strong></summary>
+<summary>🔨 <strong>VP's Tool Belt</strong></summary>
 
 ```bash
-# 🐳 SERVICES
+# 🐳 WORKSHOP SERVICES
 make up                             # Start Typesense (hybrid search)
-make up-all                         # Start all services (Typesense, PostgreSQL, Redis)
+make up-all                         # Start all services
 make down                           # Stop all services
 
-# 📥 INGESTION
-vectorpenter ingest ./docs          # Process documents
-vectorpenter snap --url "site.com"  # Capture webpage
+# 📥 DOCUMENT INGESTION
+vectorpenter ingest ./docs          # VP processes documents
+vectorpenter snap --url "site.com"  # VP captures webpage
 
-# 🔍 SEARCH & QUERY  
+# 🔍 KNOWLEDGE SEARCH  
 vectorpenter ask "question"          # Basic search
 vectorpenter ask "question" --hybrid # Vector + keyword
-vectorpenter ask "question" --rerank # Voyage AI reranking (ONLY reranker)
+vectorpenter ask "question" --rerank # VP's reranking (Voyage AI only)
 vectorpenter ask "question" --hybrid --rerank --k 20  # Full power
 
-# 🛠️ MANAGEMENT
+# 🛠️ WORKSHOP MANAGEMENT
 vectorpenter index                   # Build search indexes
-python -m apps.cursor_chat          # Interactive mode
-uvicorn apps.api:app --reload       # Start API server
+python -m apps.cursor_chat          # Chat with VP directly
+uvicorn apps.api:app --reload       # Start VP's API workshop
 
-# 🔧 DEVELOPMENT
-make dev-setup                      # Setup environment
-make test                          # Run tests  
-make production-check              # Validate readiness
+# 🔧 DEVELOPMENT WITH VP
+make dev-setup                      # Setup VP's environment
+make test                          # Test VP's capabilities
+make eval                          # Evaluate VP's performance
 ```
 
 </details>
 
 ---
 
-<div align="center">
-
-### 🎉 **Ready to Build Your Knowledge Empire?**
-
-#### **⚡ Local Quickstart (Copy-Paste Ready)**
+## ⚡ **Local Quickstart (Copy-Paste Ready)**
 
 ```bash
-# 1. Clone and setup
+# 1. Clone VP's workshop
 git clone https://github.com/doshirush1901/Vectorpenter.git
 cd vectorpenter
 cp env.example .env
 
-# 2. Edit .env with your keys (minimum required):
+# 2. Give VP his essential keys (minimum required):
 # OPENAI_API_KEY=sk-your-key-here
 # PINECONE_API_KEY=your-pinecone-key
 
-# 3. Install and start services
+# 3. Install VP and start his services
 pip install -e .
 make up  # Starts Typesense for hybrid search
 
-# 4. Create sample data and test
+# 4. Give VP something to work with
 echo "Vectorpenter is amazing for document search!" > data/inputs/test.txt
 vectorpenter ingest data/inputs
 vectorpenter index
 vectorpenter ask "What is Vectorpenter?" --hybrid --rerank
 
-# 5. Start interactive chat
+# 5. Start chatting with VP
 python -m apps.cursor_chat
 ```
 
-#### **🌟 Advanced Setup (All Features)**
+### **🌟 Advanced Setup (All VP's Powers)**
 
 ```bash
-# Enable all Google Cloud features in .env:
+# Enable all of VP's cloud abilities in .env:
 USE_GOOGLE_DOC_AI=true        # Smart PDF parsing
 USE_TRANSLATION=true          # Multi-language support  
 USE_GOOGLE_GROUNDING=true     # Web search fallback
 USE_SCREENSHOTONE=true        # Webpage capture
 USE_GCS=true                  # Audit archival
 
-# Then follow GCP_SETUP.md for service configuration
+# Then follow GCP_SETUP.md to give VP his cloud tools
 ```
-
-**🔨 Start building vectors into memory today! ✨**
 
 ---
 
-*Made with 🤖 AI • Built with ❤️ Love • Powered by ⚡ Innovation*
+<div align="center">
 
-**© 2025 Machinecraft Technologies • The Carpenter of Context**
+### 🔨 **Ready to Build with VP?**
+
+**VP is waiting in his workshop, tools ready, eager to help you organize your knowledge!**
+
+**🔨 Start building vectors into memory with VP today! ✨**
+
+---
+
+*Crafted with 🔨 Care • Built with ❤️ Love • Powered by ⚡ Innovation*
+
+**© 2025 Machinecraft Technologies • VP - The Carpenter of Context**
 
 </div>
