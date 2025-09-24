@@ -12,9 +12,7 @@
 
 <div align="center">
 
-**🔨 Turn your file chaos into instant answers 🔨**
-
-*Meet VP - Your AI Document Carpenter!*
+**Meet VP - Your AI Document Carpenter!**
 
 *Transforms any document into searchable knowledge with precision and care*
 
@@ -41,67 +39,6 @@
 ```
 
 **VP** is your **local AI carpenter** who transforms scattered documents into an organized, searchable knowledge base. Like a master craftsman, VP knows exactly which tool to use for each task - local processing for privacy and speed, cloud services when they add real value.
-
----
-
-# ℹ️ About
-
-Vectorpenter helps you turn your everyday files — PDFs, Excel sheets, reports, contracts — into a **searchable knowledge base** you can ask questions in plain language.
-
-Instead of opening 50 files and running Ctrl+F, you just ask and get the answer (with source).
-
----
-
-## 🏭 Use Cases
-
-### 👥 Recruitment
-
-* Store CVs, test reports, and interview notes.
-* Ask: *"Who has experience with SolidWorks and CNC programming?"*
-* Find the right candidate instantly.
-
-### 💼 Sales
-
-* Keep all quotes, proposals, and client emails indexed.
-* Ask: *"What price did we quote to Company X last year?"*
-* See past deals in seconds.
-
-### 📢 Marketing
-
-* Collect brochures, campaign reports, and presentations.
-* Ask: *"Which campaigns gave us the most leads in 2024?"*
-* Compare results without digging through folders.
-
-### 🛒 Purchase & Procurement
-
-* Index supplier contracts, price lists, and order records.
-* Ask: *"Which supplier had the most delivery delays last year?"*
-* Get answers across all supplier files at once.
-
-### 📦 Inventory & Stores
-
-* Pull together stock sheets and material logs.
-* Ask: *"Do we have more than 200 units of sheet X left?"*
-* Get quick status updates across multiple records.
-
-### ⚙️ Operations & Production
-
-* Store machine manuals, downtime logs, shift reports.
-* Ask: *"Top 3 causes of downtime in 2024?"*
-* Spot patterns that were hidden across files.
-
-### ✅ Quality Control
-
-* Index inspection sheets, rejection reports, and audits.
-* Ask: *"Which part had the highest defect rate last quarter?"*
-* Get the data without flipping through pages.
-
----
-
-## 🎯 The Point
-
-Every small business already has tons of data — it's just stuck in files.
-Vectorpenter wakes it up, makes it searchable, and saves you hours of manual digging.
 
 ---
 
